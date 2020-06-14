@@ -1014,7 +1014,9 @@ LLVMEngine::CompiledModule::CompiledModule(std::unique_ptr<llvm::MemoryBuffer> o
 
 // This destructor is needed because we have a unique_ptr to a forward-declared
 // TPLMemoryManager class.
-LLVMEngine::CompiledModule::~CompiledModule() = default;
+LLVMEngine::CompiledModule::~CompiledModule() {
+  memory_manager_->deregisterEHFrames();
+};
 
 void *LLVMEngine::CompiledModule::GetFunctionPointer(const std::string &name) const {
   TERRIER_ASSERT(IsLoaded(), "Compiled module isn't loaded!");

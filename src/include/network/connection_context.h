@@ -30,11 +30,16 @@ namespace terrier::network {
  */
 class ConnectionContext {
  public:
+  ConnectionContext() : region_(new execution::util::Region("ConnectionContextRegion")) {}
+  ~ConnectionContext() { delete region_; }
+
   /**
    * Cleans up this ConnectionContext.
    * This is called when its connection handle is reused to occupy another connection or destroyed.
    */
   void Reset() {
+    delete region_;
+
     connection_id_ = static_cast<connection_id_t>(0);
     cmdline_args_.clear();
     db_oid_ = catalog::INVALID_DATABASE_OID;
@@ -44,7 +49,7 @@ class ConnectionContext {
     accessor_ = nullptr;
     callback_ = nullptr;
     callback_arg_ = nullptr;
-    region_->FreeAll(); // TODO: Check sanity of this
+    region_ = new execution::util::Region("ConnectionContextRegion");
   }
 
   /**

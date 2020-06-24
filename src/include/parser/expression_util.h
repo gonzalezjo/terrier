@@ -485,14 +485,13 @@ class ExpressionUtil {
 
     std::vector<std::unique_ptr<AbstractExpression>> children;
     children.push_back(exprs[0].GetExpr()->Copy());
-    for (size_t i = 1; i < exprs.size(); ++i) {
+    for (size_t i = 1; i < exprs.size(); ++i) { //
       children.push_back(exprs[i].GetExpr()->Copy());
-
       auto shared = std::unique_ptr<ConjunctionExpression>(new (region) ConjunctionExpression(
           ExpressionType::CONJUNCTION_AND, std::move(children)));
 
       // Silence Clang!
-      // TODO(jordig) Sanity-check lifetimes (why is unique_ptr important here? When are things getting deleted?)
+      // TODO(jordig) Sanity-check lifetimes (really shouldn't need copies AFAIK?)
       std::vector<std::unique_ptr<AbstractExpression>> new_children;
       new_children.push_back(std::move(shared));
       children = std::move(new_children);

@@ -138,9 +138,11 @@ TEST_F(IdxJoinTest, SimpleIdxJoinTest) {
   binder.BindNameToNode(common::ManagedPointer(stmt_list), nullptr, nullptr);
 
   auto cost_model = std::make_unique<optimizer::TrivialCostModel>();
+
+  auto region = std::make_unique<terrier::execution::util::Region>(__FILE__);
   auto out_plan = trafficcop::TrafficCopUtil::Optimize(
       common::ManagedPointer(txn), common::ManagedPointer(accessor), common::ManagedPointer(stmt_list), db_oid_,
-      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_);
+      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_, region.get());
 
   EXPECT_EQ(out_plan->GetPlanNodeType(), planner::PlanNodeType::PROJECTION);
   EXPECT_EQ(out_plan->GetChild(0)->GetPlanNodeType(), planner::PlanNodeType::ORDERBY);
@@ -250,11 +252,12 @@ TEST_F(IdxJoinTest, MultiPredicateJoin) {
   auto accessor = catalog_->GetAccessor(common::ManagedPointer(txn), db_oid_);
   auto binder = binder::BindNodeVisitor(common::ManagedPointer(accessor), db_oid_);
   binder.BindNameToNode(common::ManagedPointer(stmt_list), nullptr, nullptr);
+  auto region = std::make_unique<terrier::execution::util::Region>(__FILE__);
 
   auto cost_model = std::make_unique<optimizer::TrivialCostModel>();
   auto out_plan = trafficcop::TrafficCopUtil::Optimize(
       common::ManagedPointer(txn), common::ManagedPointer(accessor), common::ManagedPointer(stmt_list), db_oid_,
-      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_);
+      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_, region.get());
 
   EXPECT_EQ(out_plan->GetPlanNodeType(), planner::PlanNodeType::PROJECTION);
   EXPECT_EQ(out_plan->GetChild(0)->GetPlanNodeType(), planner::PlanNodeType::ORDERBY);
@@ -330,9 +333,10 @@ TEST_F(IdxJoinTest, MultiPredicateJoinWithExtra) {
   binder.BindNameToNode(common::ManagedPointer(stmt_list), nullptr, nullptr);
 
   auto cost_model = std::make_unique<optimizer::TrivialCostModel>();
+  auto region = std::make_unique<terrier::execution::util::Region>(__FILE__);
   auto out_plan = trafficcop::TrafficCopUtil::Optimize(
       common::ManagedPointer(txn), common::ManagedPointer(accessor), common::ManagedPointer(stmt_list), db_oid_,
-      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_);
+      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_, region.get());
 
   EXPECT_EQ(out_plan->GetPlanNodeType(), planner::PlanNodeType::PROJECTION);
   EXPECT_EQ(out_plan->GetChild(0)->GetPlanNodeType(), planner::PlanNodeType::ORDERBY);
@@ -405,11 +409,11 @@ TEST_F(IdxJoinTest, FooOnlyScan) {
   auto accessor = catalog_->GetAccessor(common::ManagedPointer(txn), db_oid_);
   auto binder = binder::BindNodeVisitor(common::ManagedPointer(accessor), db_oid_);
   binder.BindNameToNode(common::ManagedPointer(stmt_list), nullptr, nullptr);
-
+  auto region = std::make_unique<terrier::execution::util::Region>(__FILE__);
   auto cost_model = std::make_unique<optimizer::TrivialCostModel>();
   auto out_plan = trafficcop::TrafficCopUtil::Optimize(
       common::ManagedPointer(txn), common::ManagedPointer(accessor), common::ManagedPointer(stmt_list), db_oid_,
-      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_);
+      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_, region.get());
 
   EXPECT_EQ(out_plan->GetPlanNodeType(), planner::PlanNodeType::PROJECTION);
   EXPECT_EQ(out_plan->GetChild(0)->GetPlanNodeType(), planner::PlanNodeType::ORDERBY);
@@ -469,10 +473,11 @@ TEST_F(IdxJoinTest, BarOnlyScan) {
   auto binder = binder::BindNodeVisitor(common::ManagedPointer(accessor), db_oid_);
   binder.BindNameToNode(common::ManagedPointer(stmt_list), nullptr, nullptr);
 
+  auto region = std::make_unique<terrier::execution::util::Region>(__FILE__);
   auto cost_model = std::make_unique<optimizer::TrivialCostModel>();
   auto out_plan = trafficcop::TrafficCopUtil::Optimize(
       common::ManagedPointer(txn), common::ManagedPointer(accessor), common::ManagedPointer(stmt_list), db_oid_,
-      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_);
+      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_, region.get());
 
   EXPECT_EQ(out_plan->GetPlanNodeType(), planner::PlanNodeType::PROJECTION);
   EXPECT_EQ(out_plan->GetChild(0)->GetPlanNodeType(), planner::PlanNodeType::ORDERBY);
@@ -532,10 +537,11 @@ TEST_F(IdxJoinTest, IndexToIndexJoin) {
   auto binder = binder::BindNodeVisitor(common::ManagedPointer(accessor), db_oid_);
   binder.BindNameToNode(common::ManagedPointer(stmt_list), nullptr, nullptr);
 
+  auto region = std::make_unique<terrier::execution::util::Region>(__FILE__);
   auto cost_model = std::make_unique<optimizer::TrivialCostModel>();
   auto out_plan = trafficcop::TrafficCopUtil::Optimize(
       common::ManagedPointer(txn), common::ManagedPointer(accessor), common::ManagedPointer(stmt_list), db_oid_,
-      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_);
+      db_main_->GetStatsStorage(), std::move(cost_model), optimizer_timeout_, region.get());
 
   EXPECT_EQ(out_plan->GetPlanNodeType(), planner::PlanNodeType::PROJECTION);
   EXPECT_EQ(out_plan->GetChild(0)->GetPlanNodeType(), planner::PlanNodeType::ORDERBY);

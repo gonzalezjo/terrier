@@ -103,6 +103,7 @@ std::unique_ptr<planner::AbstractPlanNode> TpccPlanTest::Optimize(const std::str
   binder->BindNameToNode(common::ManagedPointer(stmt_list.get()), nullptr, nullptr);
   auto *transformer = new optimizer::QueryToOperatorTransformer(common::ManagedPointer(accessor), db_);
   auto plan = transformer->ConvertToOpExpression(stmt_list->GetStatement(0), common::ManagedPointer(stmt_list.get()));
+  auto region = new terrier::execution::util::Region(__FILE__);
   delete binder;
   delete transformer;
 
@@ -133,7 +134,7 @@ std::unique_ptr<planner::AbstractPlanNode> TpccPlanTest::Optimize(const std::str
     }
 
     auto query_info = optimizer::QueryInfo(parser::StatementType::SELECT, std::move(output), property_set);
-    out_plan = optimizer->BuildPlanTree(txn_, accessor_, stats_storage_.Get(), query_info, std::move(plan));
+    out_plan = optimizer->BuildPlanTree(txn_, accessor_, stats_storage_.Get(), query_info, std::move(plan), region);
     delete property_set;
   } else if (stmt_type == parser::StatementType::INSERT) {
     auto ins_stmt = stmt_list->GetStatement(0).CastManagedPointerTo<parser::InsertStatement>();
@@ -146,7 +147,7 @@ std::unique_ptr<planner::AbstractPlanNode> TpccPlanTest::Optimize(const std::str
 
     auto property_set = new optimizer::PropertySet();
     auto query_info = optimizer::QueryInfo(stmt_type, {}, property_set);
-    out_plan = optimizer->BuildPlanTree(txn_, accessor_, stats_storage_.Get(), query_info, std::move(plan));
+    out_plan = optimizer->BuildPlanTree(txn_, accessor_, stats_storage_.Get(), query_info, std::move(plan), region);
     delete property_set;
 
     EXPECT_EQ(out_plan->GetPlanNodeType(), planner::PlanNodeType::INSERT);
@@ -166,11 +167,12 @@ std::unique_ptr<planner::AbstractPlanNode> TpccPlanTest::Optimize(const std::str
   } else {
     auto property_set = new optimizer::PropertySet();
     auto query_info = optimizer::QueryInfo(stmt_type, {}, property_set);
-    out_plan = optimizer->BuildPlanTree(txn_, accessor_, stats_storage_.Get(), query_info, std::move(plan));
+    out_plan = optimizer->BuildPlanTree(txn_, accessor_, stats_storage_.Get(), query_info, std::move(plan), region);
     delete property_set;
   }
 
   delete optimizer;
+  delete region;
   return out_plan;
 }
 

@@ -1,0 +1,168 @@
+=================================================================
+=================================================================
+==1289605==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000a3ed0 at pc 0x5602ecae6ad7 bp 0x7ffc56862bc0 sp 0x7ffc56862bb0
+==1289605==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000a3ed0 at pc 0x5602ecae6ad7 bp 0x7ffc56862bc0 sp 0x7ffc56862bb0
+WRITE of size 1 at 0x6070000a3ed0 thread T0
+WRITE of size 1 at 0x6070000a3ed0 thread T0
+    #0 0x5602ecae6ad6 in terrier::parser::AbstractExpression::AbstractExpression(terrier::parser::ExpressionType, terrier::type::TypeId, std::vector<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> >, std::allocator<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> > > >&&) /home/jg/CLionProjects/terrier/src/include/parser/expression/abstract_expression.h:49
+    #0 0x5602ecae6ad6 in terrier::parser::AbstractExpression::AbstractExpression(terrier::parser::ExpressionType, terrier::type::TypeId, std::vector<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> >, std::allocator<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> > > >&&) /home/jg/CLionProjects/terrier/src/include/parser/expression/abstract_expression.h:49
+    #1 0x5602ecf2ff84 in terrier::parser::ConjunctionExpression::ConjunctionExpression(terrier::parser::ExpressionType, std::vector<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> >, std::allocator<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> > > >&&) /home/jg/CLionProjects/terrier/src/include/parser/expression/conjunction_expression.h:22
+    #1 0x5602ecf2ff84 in terrier::parser::ConjunctionExpression::ConjunctionExpression(terrier::parser::ExpressionType, std::vector<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> >, std::allocator<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> > > >&&) /home/jg/CLionProjects/terrier/src/include/parser/expression/conjunction_expression.h:22
+    #2 0x5602ecf33972 in terrier::parser::ExpressionUtil::JoinAnnotatedExprs(std::vector<terrier::optimizer::AnnotatedExpression, std::allocator<terrier::optimizer::AnnotatedExpression> > const&, terrier::execution::util::Region*) (/home/jg/CLionProjects/terrier/cmake-build-debug/debug/tpcc_plan_delivery_test+0xfc4972)
+    #2 0x5602ecf33972 in terrier::parser::ExpressionUtil::JoinAnnotatedExprs(std::vector<terrier::optimizer::AnnotatedExpression, std::allocator<terrier::optimizer::AnnotatedExpression> > const&, terrier::execution::util::Region*) (/home/jg/CLionProjects/terrier/cmake-build-debug/debug/tpcc_plan_delivery_test+0xfc4972)
+    #3 0x5602ecf12c2b in terrier::optimizer::PlanGenerator::Visit(terrier::optimizer::IndexScan const*) /home/jg/CLionProjects/terrier/src/optimizer/plan_generator.cpp:216
+    #3 0x5602ecf12c2b in terrier::optimizer::PlanGenerator::Visit(terrier::optimizer::IndexScan const*) /home/jg/CLionProjects/terrier/src/optimizer/plan_generator.cpp:216
+    #4 0x5602ed6ef2f6 in terrier::optimizer::OperatorNodeContents<terrier::optimizer::IndexScan>::Accept(terrier::common::ManagedPointer<terrier::optimizer::OperatorVisitor>) const /home/jg/CLionProjects/terrier/src/optimizer/physical_operators.cpp:1324
+    #4 0x5602ed6ef2f6 in terrier::optimizer::OperatorNodeContents<terrier::optimizer::IndexScan>::Accept(terrier::common::ManagedPointer<terrier::optimizer::OperatorVisitor>) const /home/jg/CLionProjects/terrier/src/optimizer/physical_operators.cpp:1324
+    #5 0x5602ed6c43e4 in terrier::optimizer::Operator::Accept(terrier::common::ManagedPointer<terrier::optimizer::OperatorVisitor>) const /home/jg/CLionProjects/terrier/src/optimizer/operator_node_contents.cpp:16
+    #5 0x5602ed6c43e4 in terrier::optimizer::Operator::Accept(terrier::common::ManagedPointer<terrier::optimizer::OperatorVisitor>) const /home/jg/CLionProjects/terrier/src/optimizer/operator_node_contents.cpp:16
+    #6 0x5602ecf0fb09 in terrier::optimizer::PlanGenerator::ConvertOpNode(terrier::transaction::TransactionContext*, terrier::catalog::CatalogAccessor*, terrier::optimizer::AbstractOptimizerNode*, terrier::optimizer::PropertySet*, std::vector<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, std::allocator<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> > > const&, std::vector<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, std::allocator<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> > > const&, terrier::execution::util::Region*, std::vector<std::unique_ptr<terrier::planner::AbstractPlanNode, std::default_delete<terrier::planner::AbstractPlanNode> >, std::allocator<std::unique_ptr<terrier::planner::AbstractPlanNode, std::default_delete<terrier::planner::AbstractPlanNode> > > >&&, std::vector<std::unordered_map<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, unsigned int, terrier::optimizer::ExprHasher, terrier::optimizer::ExprEqualCmp, std::allocator<std::pair<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> const, unsigned int> > >, std::allocator<std::unordered_map<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, unsigned int, terrier::optimizer::ExprHasher, terrier::optimizer::ExprEqualCmp, std::allocator<std::pair<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> const, unsigned int> > > > >&&) /home/jg/CLionProjects/terrier/src/optimizer/plan_generator.cpp:72
+    #6 0x5602ecf0fb09 in terrier::optimizer::PlanGenerator::ConvertOpNode(terrier::transaction::TransactionContext*, terrier::catalog::CatalogAccessor*, terrier::optimizer::AbstractOptimizerNode*, terrier::optimizer::PropertySet*, std::vector<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, std::allocator<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> > > const&, std::vector<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, std::allocator<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> > > const&, terrier::execution::util::Region*, std::vector<std::unique_ptr<terrier::planner::AbstractPlanNode, std::default_delete<terrier::planner::AbstractPlanNode> >, std::allocator<std::unique_ptr<terrier::planner::AbstractPlanNode, std::default_delete<terrier::planner::AbstractPlanNode> > > >&&, std::vector<std::unordered_map<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, unsigned int, terrier::optimizer::ExprHasher, terrier::optimizer::ExprEqualCmp, std::allocator<std::pair<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> const, unsigned int> > >, std::allocator<std::unordered_map<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, unsigned int, terrier::optimizer::ExprHasher, terrier::optimizer::ExprEqualCmp, std::allocator<std::pair<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> const, unsigned int> > > > >&&) /home/jg/CLionProjects/terrier/src/optimizer/plan_generator.cpp:72
+    #7 0x5602eced1b80 in terrier::optimizer::Optimizer::ChooseBestPlan(terrier::transaction::TransactionContext*, terrier::catalog::CatalogAccessor*, terrier::common::StrongTypeAlias<terrier::optimizer::tags::group_id_t_typedef_tag, int>, terrier::optimizer::PropertySet*, std::vector<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, std::allocator<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> > > const&, terrier::execution::util::Region*) /home/jg/CLionProjects/terrier/src/optimizer/optimizer.cpp:114
+    #7 0x5602eced1b80 in terrier::optimizer::Optimizer::ChooseBestPlan(terrier::transaction::TransactionContext*, terrier::catalog::CatalogAccessor*, terrier::common::StrongTypeAlias<terrier::optimizer::tags::group_id_t_typedef_tag, int>, terrier::optimizer::PropertySet*, std::vector<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, std::allocator<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> > > const&, terrier::execution::util::Region*) /home/jg/CLionProjects/terrier/src/optimizer/optimizer.cpp:114
+    #8 0x5602eced1804 in terrier::optimizer::Optimizer::ChooseBestPlan(terrier::transaction::TransactionContext*, terrier::catalog::CatalogAccessor*, terrier::common::StrongTypeAlias<terrier::optimizer::tags::group_id_t_typedef_tag, int>, terrier::optimizer::PropertySet*, std::vector<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, std::allocator<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> > > const&, terrier::execution::util::Region*) /home/jg/CLionProjects/terrier/src/optimizer/optimizer.cpp:102
+    #8 0x5602eced1804 in terrier::optimizer::Optimizer::ChooseBestPlan(terrier::transaction::TransactionContext*, terrier::catalog::CatalogAccessor*, terrier::common::StrongTypeAlias<terrier::optimizer::tags::group_id_t_typedef_tag, int>, terrier::optimizer::PropertySet*, std::vector<terrier::common::ManagedPointer<terrier::parser::AbstractExpression>, std::allocator<terrier::common::ManagedPointer<terrier::parser::AbstractExpression> > > const&, terrier::execution::util::Region*) /home/jg/CLionProjects/terrier/src/optimizer/optimizer.cpp:102
+    #9 0x5602eced09a8 in terrier::optimizer::Optimizer::BuildPlanTree(terrier::transaction::TransactionContext*, terrier::catalog::CatalogAccessor*, terrier::optimizer::StatsStorage*, terrier::optimizer::QueryInfo, std::unique_ptr<terrier::optimizer::AbstractOptimizerNode, std::default_delete<terrier::optimizer::AbstractOptimizerNode> >, terrier::execution::util::Region*) /home/jg/CLionProjects/terrier/src/optimizer/optimizer.cpp:56
+    #9 0x5602eced09a8 in terrier::optimizer::Optimizer::BuildPlanTree(terrier::transaction::TransactionContext*, terrier::catalog::CatalogAccessor*, terrier::optimizer::StatsStorage*, terrier::optimizer::QueryInfo, std::unique_ptr<terrier::optimizer::AbstractOptimizerNode, std::default_delete<terrier::optimizer::AbstractOptimizerNode> >, terrier::execution::util::Region*) /home/jg/CLionProjects/terrier/src/optimizer/optimizer.cpp:56
+    #10 0x5602eca777b2 in terrier::TpccPlanTest::Optimize(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, terrier::parser::StatementType) /home/jg/CLionProjects/terrier/test/test_util/tpcc/tpcc_plan_test.cpp:137
+    #10 0x5602eca777b2 in terrier::TpccPlanTest::Optimize(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, terrier::parser::StatementType) /home/jg/CLionProjects/terrier/test/test_util/tpcc/tpcc_plan_test.cpp:137
+    #11 0x5602eca7ba98 in terrier::TpccPlanTest::OptimizeQuery(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, void (*)(terrier::TpccPlanTest*, terrier::parser::SelectStatement*, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, std::unique_ptr<terrier::planner::AbstractPlanNode, std::default_delete<terrier::planner::AbstractPlanNode> >)) /home/jg/CLionProjects/terrier/test/test_util/tpcc/tpcc_plan_test.cpp:212
+    #11 0x5602eca7ba98 in terrier::TpccPlanTest::OptimizeQuery(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, void (*)(terrier::TpccPlanTest*, terrier::parser::SelectStatement*, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, std::unique_ptr<terrier::planner::AbstractPlanNode, std::default_delete<terrier::planner::AbstractPlanNode> >)) /home/jg/CLionProjects/terrier/test/test_util/tpcc/tpcc_plan_test.cpp:212
+    #12 0x5602eca2a930 in terrier::TpccPlanDeliveryTests_DeliveryGetOrderId_Test::TestBody() /home/jg/CLionProjects/terrier/test/optimizer/tpcc_plan_delivery_test.cpp:25
+    #12 0x5602eca2a930 in terrier::TpccPlanDeliveryTests_DeliveryGetOrderId_Test::TestBody() /home/jg/CLionProjects/terrier/test/optimizer/tpcc_plan_delivery_test.cpp:25
+    #13 0x5602ed93577b in void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2402
+    #13 0x5602ed93577b in void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2402
+    #14 0x5602ed92fa12 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2438
+    #14 0x5602ed92fa12 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2438
+    #15 0x5602ed913e29 in testing::Test::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2474
+    #15 0x5602ed913e29 in testing::Test::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2474
+    #16 0x5602ed91475d in testing::TestInfo::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2656
+    #16 0x5602ed91475d in testing::TestInfo::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2656
+    #17 0x5602ed914df4 in testing::TestCase::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2774
+    #17 0x5602ed914df4 in testing::TestCase::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2774
+    #18 0x5602ed91bd32 in testing::internal::UnitTestImpl::RunAllTests() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:4649
+    #18 0x5602ed91bd32 in testing::internal::UnitTestImpl::RunAllTests() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:4649
+    #19 0x5602ed936ad2 in bool testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2402
+    #19 0x5602ed936ad2 in bool testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2402
+    #20 0x5602ed93092c in bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2438
+    #20 0x5602ed93092c in bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2438
+    #21 0x5602ed91a8f4 in testing::UnitTest::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:4257
+    #21 0x5602ed91a8f4 in testing::UnitTest::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:4257
+    #22 0x5602ed943b31 in RUN_ALL_TESTS() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/include/gtest/gtest.h:2233
+    #22 0x5602ed943b31 in RUN_ALL_TESTS() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/include/gtest/gtest.h:2233
+    #23 0x5602ed943abf in main /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googlemock/src/gmock_main.cc:53
+    #23 0x5602ed943abf in main /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googlemock/src/gmock_main.cc:53
+    #24 0x7f6854047001 in __libc_start_main (/usr/lib/libc.so.6+0x27001)
+    #24 0x7f6854047001 in __libc_start_main (/usr/lib/libc.so.6+0x27001)
+    #25 0x5602eca1a6fd in _start (/home/jg/CLionProjects/terrier/cmake-build-debug/debug/tpcc_plan_delivery_test+0xaab6fd)
+    #25 0x5602eca1a6fd in _start (/home/jg/CLionProjects/terrier/cmake-build-debug/debug/tpcc_plan_delivery_test+0xaab6fd)
+
+
+0x6070000a3ed0 is located 0 bytes to the right of 80-byte region [0x6070000a3e80,0x6070000a3ed0)
+0x6070000a3ed0 is located 0 bytes to the right of 80-byte region [0x6070000a3e80,0x6070000a3ed0)
+allocated by thread T0 here:
+allocated by thread T0 here:
+    #0 0x7f6854803f41 in operator new(unsigned long) /build/gcc/src/gcc/libsanitizer/asan/asan_new_delete.cpp:99
+    #0 0x7f6854803f41 in operator new(unsigned long) /build/gcc/src/gcc/libsanitizer/asan/asan_new_delete.cpp:99
+    #1 0x5602eca9a47b in std::_MakeUniq<terrier::execution::util::Region>::__single_object std::make_unique<terrier::execution::util::Region, char const (&) [70]>(char const (&) [70]) (/home/jg/CLionProjects/terrier/cmake-build-debug/debug/tpcc_plan_delivery_test+0xb2b47b)
+    #1 0x5602eca9a47b in std::_MakeUniq<terrier::execution::util::Region>::__single_object std::make_unique<terrier::execution::util::Region, char const (&) [70]>(char const (&) [70]) (/home/jg/CLionProjects/terrier/cmake-build-debug/debug/tpcc_plan_delivery_test+0xb2b47b)
+    #2 0x5602eca76d32 in terrier::TpccPlanTest::Optimize(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, terrier::parser::StatementType) /home/jg/CLionProjects/terrier/test/test_util/tpcc/tpcc_plan_test.cpp:106
+    #2 0x5602eca76d32 in terrier::TpccPlanTest::Optimize(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, terrier::parser::StatementType) /home/jg/CLionProjects/terrier/test/test_util/tpcc/tpcc_plan_test.cpp:106
+    #3 0x5602eca7ba98 in terrier::TpccPlanTest::OptimizeQuery(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, void (*)(terrier::TpccPlanTest*, terrier::parser::SelectStatement*, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, std::unique_ptr<terrier::planner::AbstractPlanNode, std::default_delete<terrier::planner::AbstractPlanNode> >)) /home/jg/CLionProjects/terrier/test/test_util/tpcc/tpcc_plan_test.cpp:212
+    #3 0x5602eca7ba98 in terrier::TpccPlanTest::OptimizeQuery(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, void (*)(terrier::TpccPlanTest*, terrier::parser::SelectStatement*, terrier::common::StrongTypeAlias<terrier::catalog::tags::table_oid_t_typedef_tag, unsigned int>, std::unique_ptr<terrier::planner::AbstractPlanNode, std::default_delete<terrier::planner::AbstractPlanNode> >)) /home/jg/CLionProjects/terrier/test/test_util/tpcc/tpcc_plan_test.cpp:212
+    #4 0x5602eca2a930 in terrier::TpccPlanDeliveryTests_DeliveryGetOrderId_Test::TestBody() /home/jg/CLionProjects/terrier/test/optimizer/tpcc_plan_delivery_test.cpp:25
+    #4 0x5602eca2a930 in terrier::TpccPlanDeliveryTests_DeliveryGetOrderId_Test::TestBody() /home/jg/CLionProjects/terrier/test/optimizer/tpcc_plan_delivery_test.cpp:25
+    #5 0x5602ed93577b in void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2402
+    #5 0x5602ed93577b in void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2402
+    #6 0x5602ed92fa12 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2438
+    #6 0x5602ed92fa12 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2438
+    #7 0x5602ed913e29 in testing::Test::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2474
+    #7 0x5602ed913e29 in testing::Test::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2474
+    #8 0x5602ed91475d in testing::TestInfo::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2656
+    #8 0x5602ed91475d in testing::TestInfo::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2656
+    #9 0x5602ed914df4 in testing::TestCase::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2774
+    #9 0x5602ed914df4 in testing::TestCase::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2774
+    #10 0x5602ed91bd32 in testing::internal::UnitTestImpl::RunAllTests() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:4649
+    #10 0x5602ed91bd32 in testing::internal::UnitTestImpl::RunAllTests() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:4649
+    #11 0x5602ed936ad2 in bool testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2402
+    #11 0x5602ed936ad2 in bool testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2402
+    #12 0x5602ed93092c in bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2438
+    #12 0x5602ed93092c in bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:2438
+    #13 0x5602ed91a8f4 in testing::UnitTest::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:4257
+    #13 0x5602ed91a8f4 in testing::UnitTest::Run() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/src/gtest.cc:4257
+    #14 0x5602ed943b31 in RUN_ALL_TESTS() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/include/gtest/gtest.h:2233
+    #14 0x5602ed943b31 in RUN_ALL_TESTS() /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googletest/include/gtest/gtest.h:2233
+    #15 0x5602ed943abf in main /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googlemock/src/gmock_main.cc:53
+    #15 0x5602ed943abf in main /home/jg/CLionProjects/terrier/cmake-build-debug/googletest_ep-prefix/src/googletest_ep/googlemock/src/gmock_main.cc:53
+    #16 0x7f6854047001 in __libc_start_main (/usr/lib/libc.so.6+0x27001)
+    #16 0x7f6854047001 in __libc_start_main (/usr/lib/libc.so.6+0x27001)
+
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /home/jg/CLionProjects/terrier/src/include/parser/expression/abstract_expression.h:49 in terrier::parser::AbstractExpression::AbstractExpression(terrier::parser::ExpressionType, terrier::type::TypeId, std::vector<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> >, std::allocator<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> > > >&&)
+SUMMARY: AddressSanitizer: heap-buffer-overflow /home/jg/CLionProjects/terrier/src/include/parser/expression/abstract_expression.h:49 in terrier::parser::AbstractExpression::AbstractExpression(terrier::parser::ExpressionType, terrier::type::TypeId, std::vector<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> >, std::allocator<std::unique_ptr<terrier::parser::AbstractExpression, std::default_delete<terrier::parser::AbstractExpression> > > >&&)
+Shadow bytes around the buggy address:
+  0x0c0e8000c780: fd fd fd fd fd fd fa fa fa fa fd fd fd fd fd fd
+  0x0c0e8000c790: fd fd fd fd fa fa fa fa fd fd fd fd fd fd fd fd
+  0x0c0e8000c7a0: fd fd fa fa fa fa fd fd fd fd fd fd fd fd fd fd
+  0x0c0e8000c7b0: fa fa fa fa 00 00 00 00 00 00 00 00 00 00 fa fa
+  0x0c0e8000c7c0: fa fa 00 00 00 00 00 00 00 00 06 fa fa fa fa fa
+=>0x0c0e8000c7d0: 00 00 00 00 00 00 00 00 00 00[fa]fa fa fa 00 00
+  0x0c0e8000c7e0: 00 00 00 00 00 00 00 00 fa fa fa fa fd fd fd fd
+  0x0c0e8000c7f0: fd fd fd fd fd fd fa fa fa fa fd fd fd fd fd fd
+  0x0c0e8000c800: fd fd fd fd fa fa fa fa fd fd fd fd fd fd fd fd
+  0x0c0e8000c810: fd fd fa fa fa fa fd fd fd fd fd fd fd fd fd fd
+  0x0c0e8000c820: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+Shadow bytes around the buggy address:
+  0x0c0e8000c780: fd fd fd fd fd fd fa fa fa fa fd fd fd fd fd fd
+  0x0c0e8000c790: fd fd fd fd fa fa fa fa fd fd fd fd fd fd fd fd
+  0x0c0e8000c7a0: fd fd fa fa fa fa fd fd fd fd fd fd fd fd fd fd
+  0x0c0e8000c7b0: fa fa fa fa 00 00 00 00 00 00 00 00 00 00 fa fa
+  0x0c0e8000c7c0: fa fa 00 00 00 00 00 00 00 00 06 fa fa fa fa fa
+=>0x0c0e8000c7d0: 00 00 00 00 00 00 00 00 00 00[fa]fa fa fa 00 00
+  0x0c0e8000c7e0: 00 00 00 00 00 00 00 00 fa fa fa fa fd fd fd fd
+  0x0c0e8000c7f0: fd fd fd fd fd fd fa fa fa fa fd fd fd fd fd fd
+  0x0c0e8000c800: fd fd fd fd fa fa fa fa fd fd fd fd fd fd fd fd
+  0x0c0e8000c810: fd fd fa fa fa fa fd fd fd fd fd fd fd fd fd fd
+  0x0c0e8000c820: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==1289605==ABORTING
+==1289605==ABORTING

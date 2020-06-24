@@ -57,6 +57,7 @@ void WorkloadCached::LoadTPCCQueries(const std::vector<std::string> &txn_names) 
   uint64_t optimizer_timeout =
       static_cast<uint64_t>(db_main_->GetSettingsManager()->GetInt(settings::Param::task_execution_timeout));
 
+  auto region = std::make_unique<terrier::execution::util::Region>(__FILE__);
   for (auto &txn_name : txn_names) {
     // read queries from files
     auto curr = queries_.emplace(txn_name, std::vector<execution::ExecutableQuery>{});
@@ -72,7 +73,7 @@ void WorkloadCached::LoadTPCCQueries(const std::vector<std::string> &txn_names) 
       // generate plan node
       std::unique_ptr<planner::AbstractPlanNode> plan_node = trafficcop::TrafficCopUtil::Optimize(
           common::ManagedPointer(txn), common::ManagedPointer(accessor), common::ManagedPointer(parse_result), db_oid_,
-          db_main_->GetStatsStorage(), std::make_unique<optimizer::TrivialCostModel>(), optimizer_timeout);
+          db_main_->GetStatsStorage(), std::make_unique<optimizer::TrivialCostModel>(), optimizer_timeout, region.get());
 
       auto exec_ctx = std::make_unique<execution::exec::ExecutionContext>(db_oid_, common::ManagedPointer(txn), nullptr,
                                                                           nullptr, common::ManagedPointer(accessor));

@@ -82,6 +82,9 @@ class TpccPlanTest : public TerrierTest {
   catalog::table_oid_t tbl_order_;
   catalog::table_oid_t tbl_order_line_;
   catalog::index_oid_t pk_new_order_;
+
+  // Memory
+  std::unique_ptr<execution::util::Region> region_;
 };
 
 }  // namespace terrier

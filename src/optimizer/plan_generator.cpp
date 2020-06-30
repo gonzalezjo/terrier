@@ -53,7 +53,8 @@ namespace terrier::optimizer {
 
 PlanGenerator::PlanGenerator() = default;
 
-std::unique_ptr<planner::AbstractPlanNode> PlanGenerator::ConvertOpNode(
+std::unique_ptr<planner::AbstractPlanNode> PlanGenerator::
+    ConvertOpNode(
     transaction::TransactionContext *txn, catalog::CatalogAccessor *accessor, AbstractOptimizerNode *op,
     PropertySet *required_props, const std::vector<common::ManagedPointer<parser::AbstractExpression>> &required_cols,
     const std::vector<common::ManagedPointer<parser::AbstractExpression>> &output_cols,

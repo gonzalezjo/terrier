@@ -129,7 +129,6 @@ std::unique_ptr<planner::AbstractPlanNode> TrafficCop::OptimizeBoundQuery(
     const common::ManagedPointer<parser::ParseResult> query) const {
   TERRIER_ASSERT(connection_ctx->TransactionState() == network::NetworkTransactionStateType::BLOCK,
                  "Not in a valid txn. This should have been caught before calling this function.");
-  std::cout << "Heck\n" << std::endl;
 
   return TrafficCopUtil::Optimize(connection_ctx->Transaction(), connection_ctx->Accessor(), query,
                                   connection_ctx->GetDatabaseOid(), stats_storage_,

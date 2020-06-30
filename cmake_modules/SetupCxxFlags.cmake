@@ -22,7 +22,10 @@
 include(CheckCXXCompilerFlag)
 
 # compiler flags that are common across debug/release builds
-set(CXX_COMMON_FLAGS "-Wall -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic")
+set(CXX_COMMON_FLAGS "-fpermissive -Wall -fno-omit-frame-pointer -fsanitize=address -g")
+set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+#set(CXX_COMMON_FLAGS "-Wall -Wno-class-memaccess -g -fprofile-arcs -ftest-coverage")
+
 if (APPLE)
     set(CXX_COMMON_FLAGS "${CXX_COMMON_FLAGS} -Wno-braced-scalar-init") # AppleClang needs this while upstream Clang and GCC are reasonable
 endif()
@@ -38,7 +41,7 @@ string(TOUPPER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE)
 # Set compile flags based on the build type.
 message("Configured for ${CMAKE_BUILD_TYPE} build (set with cmake -DCMAKE_BUILD_TYPE={release,debug,fastdebug,relwithdebinfo})")
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "DEBUG")
-    set(CXX_OPTIMIZATION_FLAGS "-ggdb -O0 -fno-omit-frame-pointer -fno-optimize-sibling-calls")
+    set(CXX_OPTIMIZATION_FLAGS "-ggdb -Og -fno-omit-frame-pointer -fno-optimize-sibling-calls")
 elseif ("${CMAKE_BUILD_TYPE}" STREQUAL "FASTDEBUG")
     set(CXX_OPTIMIZATION_FLAGS "-ggdb -O1 -fno-omit-frame-pointer -fno-optimize-sibling-calls")
 elseif ("${CMAKE_BUILD_TYPE}" STREQUAL "RELEASE")

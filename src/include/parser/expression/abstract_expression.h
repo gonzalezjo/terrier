@@ -2,6 +2,7 @@
 
 #include <functional>
 #include <memory>
+#include <new>
 #include <string>
 #include <utility>
 #include <vector>
@@ -12,6 +13,7 @@
 #include "common/managed_pointer.h"
 #include "parser/expression_defs.h"
 #include "type/type_id.h"
+#include "execution/util/region.h"
 
 namespace terrier::optimizer {
 class OptimizerUtil;
@@ -112,6 +114,17 @@ class AbstractExpression {
   }
 
  public:
+  /**
+   * Allocation
+   * @param size size of buffer to allocate
+   * @param region region to use for allocation
+   * @return pointer to allocated buffer
+   */
+  void *operator new(std::size_t size, execution::util::Region *region) { return region->Allocate(size); }
+  // TODO(jordig) perhaps overload delete for debugging assertion on free? is there any interest in this?
+  // TODO(jordig): calloc?
+  void *operator new(std::size_t size) { return ::operator new(size); }
+
   virtual ~AbstractExpression() = default;
 
   /**

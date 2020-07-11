@@ -79,7 +79,7 @@ void TpccPlanTest::SetUp() {
   region_ = std::make_unique<execution::util::Region>(__FILE__);
 }
 
-void TpccPlanTest::TearDown() { delete tpcc_db_; delete region_; }
+void TpccPlanTest::TearDown() { delete tpcc_db_; region_.reset(); }
 
 void TpccPlanTest::BeginTransaction() {
   txn_ = txn_manager_->BeginTransaction();

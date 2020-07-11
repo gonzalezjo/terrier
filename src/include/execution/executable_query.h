@@ -30,7 +30,7 @@ class Module;
 }  // namespace vm
 
 namespace util {
-class Region;
+// class Region
 }
 
 /**

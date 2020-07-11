@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <utility>
+#include <variant>
 
 #include "execution/util/memory.h"
 #include "loggers/execution_logger.h"
@@ -54,9 +55,17 @@ void Region::FreeAll() {
       "chunks: {} bytes]",
       Name().c_str(), Allocated(), AlignmentWaste(), TotalMemory());
 
-  Chunk *head = head_;
+  auto *head = head_;
   while (head != nullptr) {
-    Chunk *next = head->next_;
+    auto *next = head->next_;
+    auto buffer_contents = std::get_if<DeleterWrapper>(&head->buffer_);
+
+    // If we're dealing with a chunk containing an std::any, destroy it.
+    if (buffer_contents) {
+      buffer_contents->deleter_(buffer_contents->object_);
+    }
+
+    // TODO(jordig) make this an else case if I can region-allocate right :P
     std::free(static_cast<void *>(head));
     head = next;
   }

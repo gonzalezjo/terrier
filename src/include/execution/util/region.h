@@ -3,11 +3,13 @@
 #include <any>
 #include <cstdint>
 #include <limits>
+#include <memory> // TODO(jordig) fix
 #include <string>
 #include <type_traits>
 #include <variant>
 
 #include "common/macros.h"
+#include "common/managed_pointer.h" // TODO(jordig) is this needed?
 #include "common/math_util.h"
 #include "execution/util/execution_common.h"
 
@@ -59,6 +61,31 @@ class Region {
   }
 
   /**
+   * Delegate the freeing of a (smart or otherwise) pointer to the region
+   * @return A managed pointer representing the pointer being freed
+   */
+   template <class T>
+   common::ManagedPointer<T> Manage(std::unique_ptr<T> &ptr) {
+    // TODO(jordig) Make sure it's safe to allocate this from the region...
+    // then dew it. (plz work)
+    auto chunk = static_cast<Chunk*>(std::malloc(sizeof(Chunk)));
+    auto deleter = ptr.get_deleter();
+    auto underlying = ptr.release();
+
+    // Initialize chunk
+    chunk->Init(head_, sizeof(Chunk));
+    chunk->buffer_.emplace<DeleterWrapper>(DeleterWrapper(deleter, underlying));
+
+    // Update linked list
+    head_ = chunk;
+    position_ = chunk->Start();
+    end_ = chunk->End();
+    chunk_bytes_allocated_ += chunk->size_;
+
+    return common::ManagedPointer(underlying);
+   }
+
+  /**
    * Individual de-allocations in a region-allocator are a no-op. All memory is
    * freed when the region is destroyed, or manually through a call to
    * @em FreeAll().
@@ -98,25 +125,33 @@ class Region {
    */
   uint64_t TotalMemory() const { return chunk_bytes_allocated_; }
 
+
  private:
   // Expand the region
   uintptr_t Expand(std::size_t requested);
 
  private:
+  struct DeleterWrapper {
+    std::function<void(uintptr_t)> deleter_;
+    uintptr_t object_;
+    DeleterWrapper(const std::function<void(uintptr_t)> &deleter, uintptr_t object)
+        : deleter_(deleter), object_(object) {}
+  };
+
   // A chunk represents a physically contiguous "chunk" of memory. It is the
   // smallest unit of allocation a region acquires from the operating system.
   // Each individual region allocation is sourced from a chunk.
-  struct Chunk {
-    Chunk *next_;
-    uint64_t size_; // Includes the size of the chunk
-    std::variant<std::monostate, std::any> buffer_;
+   struct Chunk {
+     Chunk *next_;
+     uint64_t size_; // Includes the size of the chunk
+     // Either a quasi-empty buffer (akin to char[0]) or a deleter
+     std::variant<std::monostate, DeleterWrapper> buffer_;
 
     void Init(Chunk *next, uint64_t size) {
       this->next_ = next;
       this->size_ = size;
     }
 
-    // TODO(jordig): Replace with a (more natural) read of buffer_
     uintptr_t Start() const { return reinterpret_cast<uintptr_t>(&this->buffer_); }
 
     uintptr_t End() const { return reinterpret_cast<uintptr_t>(this) + size_; }

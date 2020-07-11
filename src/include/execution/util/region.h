@@ -1,9 +1,11 @@
 #pragma once
 
+#include <any>
 #include <cstdint>
 #include <limits>
 #include <string>
 #include <type_traits>
+#include <variant>
 
 #include "common/macros.h"
 #include "common/math_util.h"
@@ -106,14 +108,16 @@ class Region {
   // Each individual region allocation is sourced from a chunk.
   struct Chunk {
     Chunk *next_;
-    uint64_t size_;
+    uint64_t size_; // Includes the size of the chunk
+    std::variant<std::monostate, std::any> buffer_;
 
     void Init(Chunk *next, uint64_t size) {
       this->next_ = next;
       this->size_ = size;
     }
 
-    uintptr_t Start() const { return reinterpret_cast<uintptr_t>(this) + sizeof(Chunk); }
+    // TODO(jordig): Replace with a (more natural) read of buffer_
+    uintptr_t Start() const { return reinterpret_cast<uintptr_t>(&this->buffer_); }
 
     uintptr_t End() const { return reinterpret_cast<uintptr_t>(this) + size_; }
   };

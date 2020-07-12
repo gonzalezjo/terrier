@@ -58,11 +58,11 @@ void Region::FreeAll() {
   auto *head = head_;
   while (head != nullptr) {
     auto *next = head->next_;
-    auto buffer_contents = std::get_if<DeleterWrapper>(&head->buffer_);
+    auto deleter = std::get_if<Deleter>(&head->buffer_);
 
     // If we're dealing with a chunk containing an std::any, destroy it.
-    if (buffer_contents) {
-      buffer_contents->deleter_(buffer_contents->object_);
+    if (deleter) {
+      (*deleter)();
     }
 
     // TODO(jordig) make this an else case if I can region-allocate right :P

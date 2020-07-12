@@ -1,15 +1,14 @@
 #pragma once
 
-#include <any>
 #include <cstdint>
 #include <limits>
-#include <memory> // TODO(jordig) fix
+#include <memory> // TODO(jordig) fix?
 #include <string>
 #include <type_traits>
 #include <variant>
 
 #include "common/macros.h"
-#include "common/managed_pointer.h" // TODO(jordig) is this needed?
+#include "common/managed_pointer.h"  // TODO(jordig) is this needed?
 #include "common/math_util.h"
 #include "execution/util/execution_common.h"
 
@@ -66,18 +65,18 @@ class Region {
    * @param ptr The pointer that the region is to manage
    * @return A managed pointer representing the pointer being managed
    */
-   template <typename T>
-   common::ManagedPointer<T> Manage(std::unique_ptr<T> &ptr) {
+  template <typename T>
+  common::ManagedPointer<T> Manage(std::unique_ptr<T> &ptr) {
     // TODO(jordig) Make sure it's safe to allocate this from the region...
     // then dew it. (plz work)
-    auto chunk = static_cast<Chunk*>(std::malloc(sizeof(Chunk)));
-    auto deleter = ptr.get_deleter();
+    auto chunk = new (std::malloc(sizeof(Chunk))) Chunk;
+    // auto chunk = static_cast<Chunk *>(Allocate(sizeof(Chunk)));
     auto underlying = ptr.release();
-    auto wrapper = DeleterWrapper<T>(deleter, underlying);
+    auto wrapper = DeleterWrapper<T>(std::ref(ptr.get_deleter()), underlying);
 
     // Initialize chunk
     chunk->Init(head_, sizeof(Chunk));
-    chunk->buffer_.emplace<Deleter>(*reinterpret_cast<Deleter*>(&wrapper));
+    chunk->buffer_ = *reinterpret_cast<Deleter *>(&wrapper);
 
     // Update linked list
     head_ = chunk;
@@ -86,7 +85,7 @@ class Region {
     chunk_bytes_allocated_ += chunk->size_;
 
     return common::ManagedPointer(underlying);
-   }
+  }
 
   /**
    * Returns a unique_ptr to a leaky caller
@@ -94,10 +93,10 @@ class Region {
    * @param ptr The pointer that the region is to manage
    * @return A new unique pointer to *ptr that the caller is expected to leak
    */
-   template <typename T>
-   std::unique_ptr<T> ManageLeakedUniquePtr(std::unique_ptr<T> &ptr) {
+  template <typename T>
+  std::unique_ptr<T> ManageLeakedUniquePtr(std::unique_ptr<T> &ptr) {
     return std::unique_ptr<T>(Manage(ptr).Get());
-   }
+  }
 
   /**
    * Individual de-allocations in a region-allocator are a no-op. All memory is
@@ -139,31 +138,45 @@ class Region {
    */
   uint64_t TotalMemory() const { return chunk_bytes_allocated_; }
 
-
  private:
   // Expand the region
   uintptr_t Expand(std::size_t requested);
 
  private:
+  /**
+   * A functor that wraps around a raw pointer and its deleter.
+   * @tparam T the base type of the pointer
+   */
   template <typename T>
   struct DeleterWrapper {
-    std::default_delete<T> deleter_;
-    T* object_;
-    DeleterWrapper<T>(const std::default_delete<T> &deleter, uintptr_t object)
-        : deleter_(deleter), object_(object) {};
-    void operator () () { deleter_(object_); }
+    //
+    std::function<void(T *)> deleter_;
+    //
+    T *object_;
+    /**
+     * DeleterWrapper's constructor
+     * @param deleter The function to call with the wrapped object in order to delete it
+     * @param object The object being wrapped. Gets deleted by deleter.
+     * @return A DeleterWrapper specialized for the type T
+     */
+    DeleterWrapper(std::function<void(T *)> deleter, T *object) : deleter_(deleter), object_(object){};
+    /**
+     * The parameterless overload that deletes the wrapped object.
+     */
+    void operator()() { deleter_(object_); }
   };
 
-  using Deleter = DeleterWrapper<Region>;
+  // An alias used to erase the DeleterWrapper template argument
+  using Deleter = DeleterWrapper<void>;
 
   // A chunk represents a physically contiguous "chunk" of memory. It is the
   // smallest unit of allocation a region acquires from the operating system.
   // Each individual region allocation is sourced from a chunk.
-   struct Chunk {
-     Chunk *next_;
-     uint64_t size_; // Includes the size of the chunk
-     // Either a quasi-empty buffer (akin to char[0]) or a wrapper around delete
-     std::variant<std::monostate, Deleter> buffer_;
+  struct Chunk {
+    Chunk *next_;
+    uint64_t size_;  // Includes the size of the chunk
+    // buffer_ is either a quasi-empty buffer (e.g. char[0]) or a delete wrapper
+    std::variant<std::monostate, Deleter> buffer_;
 
     void Init(Chunk *next, uint64_t size) {
       this->next_ = next;

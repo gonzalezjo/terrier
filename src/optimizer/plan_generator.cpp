@@ -188,7 +188,8 @@ std::unique_ptr<planner::OutputSchema> PlanGenerator::GenerateScanOutputSchema(c
 
 void PlanGenerator::Visit(const SeqScan *op) {
   // Generate the predicate in the scan
-  auto predicate = parser::ExpressionUtil::JoinAnnotatedExprs(op->GetPredicates(), region_).release();
+  auto predicate_base = parser::ExpressionUtil::JoinAnnotatedExprs(op->GetPredicates(), region_);
+  auto predicate = region_->Manage(predicate_base).Get();
   // RegisterPointerCleanup<parser::AbstractExpression>(predicate, true, true);
 
   // Generate output column IDs for plan
@@ -214,8 +215,8 @@ void PlanGenerator::Visit(const IndexScan *op) {
   auto output_schema = GenerateScanOutputSchema(tbl_oid);
 
   // Generate the predicate in the scan
-  auto predicate = parser::ExpressionUtil::JoinAnnotatedExprs(op->GetPredicates(), region_).release();
-  // RegisterPointerCleanup<parser::AbstractExpression>(predicate, true, true);
+  auto predicate_base = parser::ExpressionUtil::JoinAnnotatedExprs(op->GetPredicates(), region_);
+  auto predicate = region_->Manage(predicate_base).Get();
 
   // Generate ouptut column IDs for plan
   // An IndexScan (for now at least) will output all columns of its table

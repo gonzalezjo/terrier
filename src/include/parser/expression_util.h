@@ -498,7 +498,7 @@ class ExpressionUtil {
     }
 
     TERRIER_ASSERT(children.size() == 1, "children should have exactly 1 AbstractExpression");
-    return std::move(region->ManageLeakedUniquePtr(children[0]));
+    return std::move(children[0]);
   }
 };
 

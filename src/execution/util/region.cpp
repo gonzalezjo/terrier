@@ -66,7 +66,8 @@ void Region::FreeAll() {
     }
 
     // TODO(jordig) make this an else case if I can region-allocate right :P
-    std::free(static_cast<void *>(head));
+    head->~Chunk();
+    ::operator delete(head);
     head = next;
   }
 
@@ -101,7 +102,7 @@ uintptr_t Region::Expand(std::size_t requested) {
 
   // Allocate a new chunk
   EXECUTION_LOG_TRACE("Allocating chunk of size {} common::Constants::KB", static_cast<double>(new_size) / 1024.0);
-  auto *new_chunk = static_cast<Chunk *>(std::malloc(new_size));
+  auto *new_chunk = new (::operator new (new_size)) Chunk; // TODO(jordig) give this thing a real constructor
   new_chunk->Init(head_, new_size);
 
   // Link it in

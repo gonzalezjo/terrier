@@ -487,8 +487,9 @@ class ExpressionUtil {
     children.push_back(exprs[0].GetExpr()->Copy());
     for (size_t i = 1; i < exprs.size(); ++i) { //
       children.push_back(exprs[i].GetExpr()->Copy());
-      auto shared = std::unique_ptr<ConjunctionExpression>(new (region) ConjunctionExpression(
-          ExpressionType::CONJUNCTION_AND, std::move(children)));
+      // auto shared = std::unique_ptr<ConjunctionExpression>(new (region) ConjunctionExpression(
+          // ExpressionType::CONJUNCTION_AND, std::move(children)));
+      auto shared = std::make_unique<ConjunctionExpression>(ExpressionType::CONJUNCTION_AND, std::move(children));
 
       // Silence Clang!
       // TODO(jordig) Sanity-check lifetimes (really shouldn't need copies AFAIK?)

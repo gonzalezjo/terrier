@@ -67,16 +67,16 @@ class Region {
    */
   template <typename T>
   common::ManagedPointer<T> Manage(std::unique_ptr<T> &ptr) {
-    // TODO(jordig) Make sure it's safe to allocate this from the region...
-    // then dew it. (plz work)
-    auto chunk = static_cast<Chunk *>(std::malloc(sizeof(Chunk)));
-    // auto chunk = static_cast<Chunk *>(Allocate(sizeof(Chunk)));
+    // TODO(jordig) Make sure it's safe to allocate this from the region & do it
+    // Should just be making the if into an else-if and then dragging that out.
+    // maybe UAF but order on our side i think? otws reverse or peek. test it
+    auto chunk = new (::operator new (sizeof(Chunk))) Chunk;
     auto underlying = ptr.release();
     auto wrapper = DeleterWrapper<T>(std::ref(ptr.get_deleter()), underlying);
 
     // Initialize chunk
-    chunk->Init(head_, sizeof(Chunk));
-    chunk->buffer_ = std::variant<std::monostate, Deleter>(*reinterpret_cast<Deleter *>(&wrapper));
+    chunk->Init(head_, sizeof(Chunk)); // TODO: Chunk can have a real constructor
+    chunk->buffer_ = *reinterpret_cast<Deleter *>(&wrapper);
 
     // Update linked list
     head_ = chunk;
@@ -179,10 +179,8 @@ class Region {
     std::variant<std::monostate, Deleter> buffer_;
 
     void Init(Chunk *next, uint64_t size) {
-      std::variant<std::monostate, Deleter> temporary;
       this->next_ = next;
       this->size_ = size;
-      this->buffer_ = temporary; // Initialize the variant.
     }
 
     uintptr_t Start() const { return reinterpret_cast<uintptr_t>(&this->buffer_); }

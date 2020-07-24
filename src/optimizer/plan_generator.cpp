@@ -188,8 +188,7 @@ std::unique_ptr<planner::OutputSchema> PlanGenerator::GenerateScanOutputSchema(c
 
 void PlanGenerator::Visit(const SeqScan *op) {
   // Generate the predicate in the scan
-  auto predicate_base = parser::ExpressionUtil::JoinAnnotatedExprs(op->GetPredicates(), region_);
-  auto predicate = region_->Manage(predicate_base).Get();
+  auto predicate = region_->Manage(parser::ExpressionUtil::JoinAnnotatedExprs(op->GetPredicates(), region_)).Get();
   // RegisterPointerCleanup<parser::AbstractExpression>(predicate, true, true);
 
   // Generate output column IDs for plan
@@ -215,8 +214,7 @@ void PlanGenerator::Visit(const IndexScan *op) {
   auto output_schema = GenerateScanOutputSchema(tbl_oid);
 
   // Generate the predicate in the scan
-  auto predicate_base = parser::ExpressionUtil::JoinAnnotatedExprs(op->GetPredicates(), region_);
-  auto predicate = region_->Manage(predicate_base).Get();
+  auto predicate = region_->Manage(parser::ExpressionUtil::JoinAnnotatedExprs(op->GetPredicates(), region_)).Get();
 
   // Generate ouptut column IDs for plan
   // An IndexScan (for now at least) will output all columns of its table
@@ -360,7 +358,7 @@ void PlanGenerator::Visit(const Limit *op) {
 
       // Evaluate the sort_column using children_expr_map (what the child provides)
       // Need to replace ColumnValueExpression with DerivedValueExpression
-      auto eval_expr = parser::ExpressionUtil::EvaluateExpression({child_cols_map}, sort_columns[i], region_).release();
+      auto eval_expr = region_->Manage(parser::ExpressionUtil::EvaluateExpression({child_cols_map}, sort_columns[i], region_)).Get();
       // RegisterPointerCleanup<parser::AbstractExpression>(eval_expr, true, true);
       order_build.AddSortKey(common::ManagedPointer(eval_expr), sort_flags[i]);
     }
@@ -664,7 +662,7 @@ void PlanGenerator::BuildAggregatePlan(
 
     if (parser::ExpressionUtil::IsAggregateExpression(expr->GetExpressionType())) {
       // We need to evaluate the expression first, convert ColumnValue => DerivedValue
-      auto eval = parser::ExpressionUtil::EvaluateExpression(children_expr_map_, expr, region_).release();
+      auto eval = region_->Manage(parser::ExpressionUtil::EvaluateExpression(children_expr_map_, expr, region_)).Get();
       TERRIER_ASSERT(parser::ExpressionUtil::IsAggregateExpression(eval->GetExpressionType()),
                      "Evaluated AggregateExpression should still be an aggregate expression");
 
@@ -673,7 +671,7 @@ void PlanGenerator::BuildAggregatePlan(
       builder.AddAggregateTerm(common::ManagedPointer(agg_expr));
 
       // Maps the aggregate value in the right tuple to the output
-      // See aggregateor.cpp for more detail...
+      // See aggregator.cpp for more detail...
       auto dve = std::make_unique<parser::DerivedValueExpression>(expr->GetReturnValueType(), 1, agg_id++);
       columns.emplace_back(expr->GetExpressionName(), expr->GetReturnValueType(), std::move(dve));
     } else if (gb_map.find(expr) != gb_map.end()) {
@@ -793,9 +791,8 @@ void PlanGenerator::Visit(const Update *op) {
      * It's (seemingly) immutable, so why make a copy and pass a pointer to it?
      * Need to run tests w/code to pass the original update value.
      */
-    auto upd_value = update->GetUpdateValue()->Copy().release();
-    builder.AddSetClause(std::make_pair(col_id, common::ManagedPointer(upd_value)));
-    // RegisterPointerCleanup<parser::AbstractExpression>(upd_value, true, true);
+    auto upd_value = region_->Manage(update->GetUpdateValue()->Copy());
+    builder.AddSetClause(std::make_pair(col_id, upd_value));
   }
 
   // Empty OutputSchema for update

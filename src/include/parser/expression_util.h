@@ -360,7 +360,9 @@ class ExpressionUtil {
         if (iter != expr_map.end()) {
           // Create DerivedValueExpression (iter->second is value_idx)
           auto type = c_tup_expr->GetReturnValueType();
-          return std::unique_ptr<DerivedValueExpression>(new (region) DerivedValueExpression(type, tuple_idx, iter->second));
+          // TODO(jordig): cleanup
+          return std::make_unique<DerivedValueExpression>(type, tuple_idx, iter->second);
+          // return std::unique_ptr<DerivedValueExpression>(new (region) DerivedValueExpression(type, tuple_idx, iter->second));
         }
         ++tuple_idx;
       }
@@ -429,7 +431,7 @@ class ExpressionUtil {
       // Create and return new CaseExpression that is evaluated
       auto def_cond = EvaluateExpression(expr_maps, case_expr->GetDefaultClause(), region);
       auto type = case_expr->GetReturnValueType();
-      return std::unique_ptr<CaseExpression>(new (region) CaseExpression(type, std::move(clauses), std::move(def_cond)));
+      return std::make_unique<CaseExpression>(type, std::move(clauses), std::move(def_cond));
     }
 
     /*

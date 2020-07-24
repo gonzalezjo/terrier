@@ -59,6 +59,9 @@ class Region {
     return static_cast<T *>(Allocate(num_elems * sizeof(T), alignof(T)));
   }
 
+  /* TODO(jordig) Should this be "Managed"? DelegateToRegion? TakeOwnership?
+   * TODO(jordig) Maybe something as short and non-descript as "Move"? No... Hm.
+   */
   /**
    * Delegate the freeing of a unique_ptr to the region
    * @tparam T The base-type of the pointer
@@ -66,7 +69,7 @@ class Region {
    * @return A managed pointer representing the pointer being managed
    */
   template <typename T>
-  common::ManagedPointer<T> Manage(std::unique_ptr<T> &ptr) {
+  common::ManagedPointer<T> Manage(std::unique_ptr<T> ptr) {
     // TODO(jordig) Make sure it's safe to allocate this from the region & do it
     // Should just be making the if into an else-if and then dragging that out.
     // maybe UAF but order on our side i think? otws reverse or peek. test it
@@ -87,6 +90,7 @@ class Region {
     return common::ManagedPointer(underlying);
   }
 
+  // TODO(jordig) probably unneeded. definitely hacky and gross. remove later?
   /**
    * Returns a unique_ptr to a leaky caller
    * @tparam T The base-type of the pointer

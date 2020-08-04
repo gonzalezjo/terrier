@@ -28,6 +28,8 @@ else ()
     find_program(CLANG NAMES ${SUPPORTED_CLANGS})
 endif ()
 
+message(STATUS "Optimized bitcode will be compiled with ${CLANG}")
+
 # Setup compiler arguments to Clang
 set(CLANG_IR_CXX_FLAGS "${CXX_ONLY_FLAGS} ${CXX_OPTIMIZATION_FLAGS} ${CXX_COMMON_FLAGS} -emit-llvm -c")
 string(REPLACE "-fPIC" "" CLANG_IR_CXX_FLAGS ${CLANG_IR_CXX_FLAGS})

@@ -20,11 +20,12 @@ configure_file(
 
 # Find CLANG
 set(SUPPORTED_CLANGS "clang++-8" "clang++")
-find_program(CLANG NAMES ${SUPPORTED_CLANGS})
-if (NOT EXISTS ${CLANG})
-    message(FATAL_ERROR "Unable to locate clang++.")
+
+# On macOS, the clang++ we want is not the clang++ in PATH. On Linux, it is.
+if (APPLE)
+    set(CLANG "${LLVM_TOOLS_BINARY_DIR}/clang++")
 else ()
-    message(STATUS "Found Clang ${CLANG}")
+    find_program(CLANG NAMES ${SUPPORTED_CLANGS})
 endif ()
 
 # Setup compiler arguments to Clang

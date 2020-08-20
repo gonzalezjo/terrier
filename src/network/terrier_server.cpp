@@ -8,7 +8,6 @@
 #include "common/dedicated_thread_registry.h"
 #include "common/settings.h"
 #include "common/utility.h"
-#include "event2/thread.h"
 #include "loggers/network_logger.h"
 #include "network/connection_handle_factory.h"
 #include "network/network_defs.h"
@@ -139,7 +138,7 @@ void TerrierServer::RegisterSocket() {
 
 void TerrierServer::RunServer() {
   // This line is critical to performance for some reason
-  evthread_use_pthreads();
+  //  evthread_use_pthreads(); // TODO(jordig) Test and see how important this really is.
 
   // Register the network socket
   RegisterSocket<NETWORKED_SOCKET>();

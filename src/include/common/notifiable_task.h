@@ -1,12 +1,11 @@
 #pragma once
 
-#include <event2/thread.h>
-
 #include <unordered_set>
 
 #include "common/dedicated_thread_task.h"
 #include "common/event_util.h"
 #include "common/macros.h"
+#include "libev/event.h"
 #include "loggers/common_logger.h"
 
 namespace terrier::common {
@@ -76,7 +75,7 @@ class NotifiableTask : public DedicatedThreadTask {
    * @return pointer to the allocated event.
    */
   struct event *RegisterEvent(int fd, int16_t flags, event_callback_fn callback, void *arg,
-                              const struct timeval *timeout = nullptr);
+                              struct timeval *timeout = nullptr);
   /**
    * @brief Register a signal event. This is a wrapper around RegisterEvent()
    *
@@ -103,7 +102,7 @@ class NotifiableTask : public DedicatedThreadTask {
    * @param arg an argument to be passed to the callback function
    * @return pointer to the allocated event.
    */
-  struct event *RegisterPeriodicEvent(const struct timeval *timeout, event_callback_fn callback, void *arg) {
+  struct event *RegisterPeriodicEvent(struct timeval *timeout, event_callback_fn callback, void *arg) {
     return RegisterEvent(-1, EV_TIMEOUT | EV_PERSIST, callback, arg, timeout);
   }
 
@@ -133,7 +132,7 @@ class NotifiableTask : public DedicatedThreadTask {
    * @param timeout Timeout if any for the event
    */
   void UpdateEvent(struct event *event, int fd, int16_t flags, event_callback_fn callback, void *arg,
-                   const struct timeval *timeout = nullptr) {
+                   struct timeval *timeout = nullptr) {
     TERRIER_ASSERT(!(events_.find(event) == events_.end()), "Didn't find event");
     EventUtil::EventDel(event);
     EventUtil::EventAssign(event, base_, fd, flags, callback, arg);

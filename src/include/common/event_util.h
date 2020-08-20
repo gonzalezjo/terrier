@@ -1,9 +1,6 @@
 #pragma once
 
-#include <event2/buffer.h>
-#include <event2/bufferevent.h>
-#include <event2/event.h>
-#include <event2/listener.h>
+#include <libev/event.h>
 
 #include "common/error/exception.h"
 
@@ -49,7 +46,7 @@ class EventUtil {
    * @param timeout
    * @return a positive integer or an exception is thrown on failure
    */
-  static int EventBaseLoopExit(struct event_base *base, const struct timeval *timeout) {
+  static int EventBaseLoopExit(struct event_base *base, struct timeval *timeout) {
     return Wrap(event_base_loopexit(base, timeout), IsZero, "Error when exiting loop");
   }
 
@@ -64,7 +61,7 @@ class EventUtil {
    * @param timeout
    * @return a positive integer or an exception is thrown on failure
    */
-  static int EventAdd(struct event *event, const struct timeval *timeout) {
+  static int EventAdd(struct event *event, struct timeval *timeout) {
     return Wrap(event_add(event, timeout), IsZero, "Error when adding event");
   }
 
@@ -80,7 +77,8 @@ class EventUtil {
    */
   static int EventAssign(struct event *event, struct event_base *base, int fd, int16_t flags,
                          event_callback_fn callback, void *arg) {
-    return Wrap(event_assign(event, base, fd, flags, callback, arg), IsZero, "Error when assigning event");
+    event_set(event, fd, flags, callback, arg);
+    return Wrap(event_base_set(base, event), IsZero, "Error when assigning event");
   }
 
   /**

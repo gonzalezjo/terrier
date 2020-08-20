@@ -20,14 +20,17 @@ NotifiableTask::NotifiableTask(int task_id) : task_id_(task_id) {
 NotifiableTask::~NotifiableTask() {
   for (struct event *event : events_) {
     EventUtil::EventDel(event);
-    event_free(event);
+    event_del(event);
+    std::free(event); // TODO(jordig) test this. a lot.
   }
   event_base_free(base_);
 }
 
 struct event *NotifiableTask::RegisterEvent(int fd, int16_t flags, event_callback_fn callback, void *arg,
-                                            const struct timeval *timeout) {
-  struct event *event = event_new(base_, fd, flags, callback, arg);
+                                            struct timeval *timeout) {
+  struct event *event = static_cast<struct event *>(std::malloc(sizeof(struct event)));
+  event_set(event, fd, flags, callback, arg);
+  event_base_set(base_, event);
   events_.insert(event);
   EventUtil::EventAdd(event, timeout);
   return event;
@@ -40,7 +43,8 @@ void NotifiableTask::UnregisterEvent(struct event *event) {
     COMMON_LOG_ERROR("Failed to delete event");
     return;
   }
-  event_free(event);
+  event_del(event);
+  std::free(event); // TODO(jordig) test this. a lot. (x2)
   events_.erase(event);
 }
 

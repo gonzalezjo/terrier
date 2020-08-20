@@ -252,6 +252,7 @@ if (TERRIER_USE_JEMALLOC)
     message(STATUS "jemalloc is enabled.")
 endif ()
 
+# TODO(jordig) remove the weird ---[... oh, and also purge libevent entirely
 # ---[ Libevent
 find_package(Libevent REQUIRED)
 include_directories(SYSTEM ${LIBEVENT_INCLUDE_DIRS})

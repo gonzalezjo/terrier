@@ -1,4 +1,4 @@
-project(libev CXX)
+project(libev CXX C)
 
 file(GLOB_RECURSE
     libev_srcs
@@ -7,7 +7,6 @@ file(GLOB_RECURSE
 
 list(FILTER libev_srcs EXCLUDE REGEX "ev_.*\\.c")
 
-message(${libev_srcs})
 include_directories(.)
 
 add_library(libev STATIC ${libev_srcs})

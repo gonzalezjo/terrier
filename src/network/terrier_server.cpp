@@ -138,7 +138,8 @@ void TerrierServer::RegisterSocket() {
 
 void TerrierServer::RunServer() {
   // This line is critical to performance for some reason
-  //  evthread_use_pthreads(); // TODO(jordig) Test and see how important this really is.
+  // evthread_use_pthreads(); // TODO(jordig) Test and see how important this really is.
+  // Update... Done! Very important! Bug spotted.
 
   // Register the network socket
   RegisterSocket<NETWORKED_SOCKET>();
@@ -146,7 +147,7 @@ void TerrierServer::RunServer() {
   // Register the Unix domain socket if Unix domain sockets have been turned on
   if (use_unix_socket_) {
     // TODO(jordig) Why would we need a lockfile á la Postgres? What do they even use it for?
-    RegisterSocket<UNIX_DOMAIN_SOCKET>();
+//    RegisterSocket<UNIX_DOMAIN_SOCKET>();
   }
 
   // Set the running_ flag for any waiting threads

@@ -9,8 +9,9 @@ namespace terrier::network {
 ConnectionHandlerTask::ConnectionHandlerTask(const int task_id,
                                              common::ManagedPointer<ConnectionHandleFactory> connection_handle_factory)
     : NotifiableTask(task_id), connection_handle_factory_(connection_handle_factory) {
+  // TODO(jordig) figure out what this is doing w/ the weird ev_read call
   notify_event_ =
-      RegisterEvent(-1, EV_READ | EV_PERSIST, METHOD_AS_CALLBACK(ConnectionHandlerTask, HandleDispatch), this);
+      RegisterEvent(-1, /*EV_READ |*/ EV_PERSIST | EV_COMPAT, METHOD_AS_CALLBACK(ConnectionHandlerTask, HandleDispatch), this);
 }
 
 void ConnectionHandlerTask::Notify(int conn_fd, std::unique_ptr<ProtocolInterpreter> protocol_interpreter) {
@@ -21,9 +22,10 @@ void ConnectionHandlerTask::Notify(int conn_fd, std::unique_ptr<ProtocolInterpre
     common::SpinLatch::ScopedSpinLatch guard(&jobs_latch_);
     jobs_.emplace_back(conn_fd, std::move(protocol_interpreter));
   }
-  int res = 0;         // Flags, unused attribute in event_active
+  // TODO(jordig) update the comments
+  // int res = 1;         // Flags, unused attribute in event_active
   int16_t ncalls = 0;  // Unused attribute in event_active
-  event_active(notify_event_, res, ncalls);
+  event_active(notify_event_, EV_READ | EV_COMPAT, ncalls);
 }
 
 void ConnectionHandlerTask::HandleDispatch(int, int16_t) {  // NOLINT as we don't use the flags arg nor the fd

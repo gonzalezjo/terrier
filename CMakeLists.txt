@@ -380,10 +380,12 @@ endif ()
 set(TERRIER_LINK_LIBS
         gflags
         ${TERRIER_LINK_LIBS}
-        pg_query)
+        pg_query
+        libev)
 
 set(TERRIER_DEPENDENCIES
-        gflags)
+        gflags
+        libev)
 
 set(TERRIER_TEST_LINK_LIBS
         test_util

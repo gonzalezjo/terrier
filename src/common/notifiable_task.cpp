@@ -31,6 +31,7 @@ struct event *NotifiableTask::RegisterEvent(int fd, int16_t flags, event_callbac
                                             struct timeval *timeout) {
   struct event *event = static_cast<struct event *>(std::malloc(sizeof(struct event)));
 
+  event_init();
   event_set(event, fd, flags, callback, arg);
   event_base_set(base_, event);
   events_.insert(event);

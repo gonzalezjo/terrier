@@ -2077,10 +2077,10 @@ ev_realloc (void *ptr, long size)
 typedef struct
 {
   WL head;
-  unsigned char events; /* the events watched for */
-  unsigned char reify;  /* flag set when this ANFD needs reification (EV_ANFD_REIFY, EV__IOFDSET) */
-  unsigned char emask;  /* some backends store the actual kernel mask in here */
-  unsigned char eflags; /* flags field for use by backends */
+  unsigned char events;   /* the events watched for */
+  unsigned char reify;    /* flag set when this ANFD needs reification (EV_ANFD_REIFY, EV__IOFDSET) */
+  unsigned char emask;    /* some backends store the actual kernel mask in here */
+  unsigned char eflags;   /* flags field for use by backends */
 #if EV_USE_EPOLL
   unsigned int egen;    /* generation counter to counter epoll bugs */
 #endif
@@ -2357,7 +2357,16 @@ queue_events (EV_P_ W *events, int eventcnt, int type)
 inline_speed void
 fd_event_nocheck (EV_P_ int fd, int revents)
 {
-  ANFD *anfd = anfds + fd;
+  ANFD *anfd;
+  bool abnormal = fd == -1;
+
+  // Should be very predictable branch
+  if (abnormal) {
+    anfd = anfds;
+  } else { 
+    anfd = anfds + fd;
+  }
+
   ev_io *w;
 
   for (w = (ev_io *)anfd->head; w; w = (ev_io *)((WL)w)->next)
@@ -3087,19 +3096,19 @@ evtimerfd_init (EV_P)
 # include "ev_kqueue.c"
 #endif
 #if EV_USE_EPOLL
-# include "ev_epoll.c"
+# include "ev_epoll.cpp"
 #endif
 #if EV_USE_LINUXAIO
 # include "ev_linuxaio.c"
 #endif
 #if EV_USE_IOURING
-# include "ev_iouring.c"
+# include "ev_iouring.cpp"
 #endif
 #if EV_USE_POLL
-# include "ev_poll.c"
+# include "ev_poll.cpp"
 #endif
 #if EV_USE_SELECT
-# include "ev_select.c"
+# include "ev_select.cpp"
 #endif
 
 ecb_cold int
@@ -4332,11 +4341,16 @@ void
 ev_io_start (EV_P_ ev_io *w) EV_NOEXCEPT
 {
   int fd = w->fd;
+  bool skip_watcher_add = false;
 
   if (ecb_expect_false (ev_is_active (w)))
     return;
 
-  assert (("libev: ev_io_start called with negative fd", fd >= 0));
+  if (fd <= 0 && fd != -1 && (w->events & (EV_READ | EV_WRITE | EV_SIGNAL))) {
+    skip_watcher_add = true;
+    assert (("libev: ev_io_start called with negative fd", fd >= 0));
+  }
+
   assert (("libev: ev_io_start called with illegal event mask", !(w->events & ~(EV__IOFDSET | EV_READ | EV_WRITE))));
 
 #if EV_VERIFY >= 2
@@ -4345,8 +4359,12 @@ ev_io_start (EV_P_ ev_io *w) EV_NOEXCEPT
   EV_FREQUENT_CHECK;
 
   ev_start (EV_A_ (W)w, 1);
-  array_needsize (ANFD, anfds, anfdmax, fd + 1, array_needsize_zerofill);
-  wlist_add (&anfds[fd].head, (WL)w);
+  array_needsize (ANFD, anfds, anfdmax, fd + 2, array_needsize_zerofill);
+  if (skip_watcher_add) {
+    wlist_add (&anfds[0].head, (WL)w);
+  } else {
+    wlist_add (&anfds[fd].head, (WL)w);
+  }
 
   /* common bug, apparently */
   assert (("libev: ev_io_start called with corrupted watcher", ((WL)w)->next != (WL)w));

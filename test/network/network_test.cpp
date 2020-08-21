@@ -78,7 +78,7 @@ class NetworkTests : public TerrierTest {
     catalog_->CreateDatabase(common::ManagedPointer(txn), catalog::DEFAULT_DATABASE, true);
     txn_manager_->Commit(txn, transaction::TransactionUtil::EmptyCallback, nullptr);
 
-    network_logger->set_level(spdlog::level::info);
+    network_logger->set_level(spdlog::level::trace);
     spdlog::flush_every(std::chrono::seconds(1));
 
     try {

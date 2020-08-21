@@ -56,10 +56,6 @@
 #endif
 
 /* never accessed, will always be cast from/to ev_loop */
-struct event_base
-{
-  int dummy;
-};
 
 static struct event_base *ev_x_cur;
 
@@ -357,7 +353,7 @@ int event_base_loop (struct event_base *base, int flags)
 {
   dLOOPbase;
 
-  return !ev_run (EV_A_ flags);
+  return !ev_run (reinterpret_cast<struct ev_loop*>(base), flags);
 }
 
 int event_base_dispatch (struct event_base *base)

@@ -59,7 +59,7 @@ file(GLOB_RECURSE LIBCUCKOO_SOURCES ${PROJECT_SOURCE_DIR}/third_party/libcuckoo/
 list(APPEND TERRIER_SRCS ${LIBCUCKOO_SOURCES})
 
 # libev
-add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/libev/ libev.a)
+add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/libev/ ev.a)
 
 ###############################################
 # Terrier library

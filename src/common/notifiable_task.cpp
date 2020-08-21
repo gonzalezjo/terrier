@@ -22,6 +22,7 @@ NotifiableTask::~NotifiableTask() {
     EventUtil::EventDel(event);
     event_del(event);
     std::free(event); // TODO(jordig) test this. a lot.
+    ev_loop_destroy(loop_); // TODO(jordig) test this. a lot. (x3)
   }
   event_base_free(base_);
 }
@@ -29,23 +30,30 @@ NotifiableTask::~NotifiableTask() {
 struct event *NotifiableTask::RegisterEvent(int fd, int16_t flags, event_callback_fn callback, void *arg,
                                             struct timeval *timeout) {
   struct event *event = static_cast<struct event *>(std::malloc(sizeof(struct event)));
+
+  ev_loop_new(0);
   event_set(event, fd, flags, callback, arg);
   event_base_set(base_, event);
   events_.insert(event);
   EventUtil::EventAdd(event, timeout);
+
   return event;
 }
 
 void NotifiableTask::UnregisterEvent(struct event *event) {
   auto it = events_.find(event);
+
   if (it == events_.end()) return;
   if (event_del(event) == -1) {
     COMMON_LOG_ERROR("Failed to delete event");
     return;
   }
+
   event_del(event);
-  std::free(event); // TODO(jordig) test this. a lot. (x2)
-  events_.erase(event);
+  std::free(event);       // TODO(jordig) test this. a lot. (x2)
+  ev_loop_destroy(loop_); // TODO(jordig) test this. a lot. (x3)
+  loop_ = nullptr;        // TODO(jordig) should make catching bugs easier but I should actually make sure its stable
+  events_.erase(event);   // TODO(jordig) remember to run clang tidy and format and stuff lol
 }
 
 }  // namespace terrier::common

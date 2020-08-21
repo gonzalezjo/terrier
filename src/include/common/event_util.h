@@ -46,8 +46,9 @@ class EventUtil {
    * @param timeout
    * @return a positive integer or an exception is thrown on failure
    */
-  static int EventBaseLoopExit(struct event_base *base, struct timeval *timeout) {
-    return Wrap(event_base_loopexit(base, timeout), IsZero, "Error when exiting loop");
+  static int EventBaseLoopExit(struct event_base *base, struct ev_loop *loop, struct timeval *timeout) {
+    ev_break(loop, EVBREAK_ONE);
+    return 1;
   }
 
   /**
@@ -83,11 +84,12 @@ class EventUtil {
 
   /**
    * @brief Runs event base dispatch loop
-   * @param base The event_base to dispatch on
+   * @param loop The ev_loop to dispatch on
    * @return a positive integer or an exception is thrown on failure
    */
-  static int EventBaseDispatch(struct event_base *base) {
-    return Wrap(event_base_dispatch(base), NonNegative, "Error in event base dispatch");
+  static int EventBaseDispatch(struct ev_loop* loop) {
+//    return Wrap(event_base_dispatch(base), NonNegative, "Error in event base dispatch");
+      return ev_run(loop, 0);
   }
 };
 }  // namespace terrier

@@ -5,6 +5,7 @@
 #include "common/dedicated_thread_task.h"
 #include "common/event_util.h"
 #include "common/macros.h"
+#include "libev/ev.h"
 #include "libev/event.h"
 #include "loggers/common_logger.h"
 
@@ -162,7 +163,9 @@ class NotifiableTask : public DedicatedThreadTask {
   /**
    * Overrides DedicatedThreadTask entry point method
    */
-  void RunTask() override { EventLoop(); }
+  void RunTask() override {
+    EventLoop();
+  }
 
   /**
    * Overrides DedicatedThreadTask exit point method
@@ -182,6 +185,8 @@ class NotifiableTask : public DedicatedThreadTask {
  private:
   const int task_id_;
   struct event_base *base_;
+  struct ev_loop* loop_;
+
 
   // struct event and lifecycle management
   struct event *terminate_;

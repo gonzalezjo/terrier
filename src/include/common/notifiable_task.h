@@ -185,8 +185,6 @@ class NotifiableTask : public DedicatedThreadTask {
  private:
   const int task_id_;
   struct event_base *base_;
-  struct ev_loop* loop_;
-
 
   // struct event and lifecycle management
   struct event *terminate_;

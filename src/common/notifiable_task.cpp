@@ -21,8 +21,8 @@ NotifiableTask::~NotifiableTask() {
   for (struct event *event : events_) {
     EventUtil::EventDel(event);
     event_del(event);
-    std::free(event); // TODO(jordig) test this. a lot.
-    ev_loop_destroy(loop_); // TODO(jordig) test this. a lot. (x3)
+//    std::free(event); // TODO(jordig) test this. a lot.
+//    ev_loop_destroy(loop_); // TODO(jordig) test this. a lot. (x3)
   }
   event_base_free(base_);
 }
@@ -31,7 +31,6 @@ struct event *NotifiableTask::RegisterEvent(int fd, int16_t flags, event_callbac
                                             struct timeval *timeout) {
   struct event *event = static_cast<struct event *>(std::malloc(sizeof(struct event)));
 
-  ev_loop_new(0);
   event_set(event, fd, flags, callback, arg);
   event_base_set(base_, event);
   events_.insert(event);
@@ -51,8 +50,8 @@ void NotifiableTask::UnregisterEvent(struct event *event) {
 
   event_del(event);
   std::free(event);       // TODO(jordig) test this. a lot. (x2)
-  ev_loop_destroy(loop_); // TODO(jordig) test this. a lot. (x3)
-  loop_ = nullptr;        // TODO(jordig) should make catching bugs easier but I should actually make sure its stable
+//  ev_loop_destroy(loop_); // TODO(jordig) test this. a lot. (x3)
+//  loop_ = nullptr;        // TODO(jordig) should make catching bugs easier but I should actually make sure its stable
   events_.erase(event);   // TODO(jordig) remember to run clang tidy and format and stuff lol
 }
 

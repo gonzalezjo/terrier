@@ -66,7 +66,7 @@ void TerrierServer::RegisterSocket() {
     } else {
       // Builds the socket path name
       // Naming conventions come from https://www.postgresql.org/docs/9.3/runtime-config-connection.html
-      const std::string socket_path = fmt::format("{0}/.s.PGSQL.{1}", socket_directory_, port_);
+      const std::string socket_path = fmt::format("@{0}/.s.PGSQL.{1}", socket_directory_, port_);
       struct sockaddr_un sun = {0};
       memset(&sun, 0, sizeof(struct sockaddr_un));
 
@@ -78,6 +78,7 @@ void TerrierServer::RegisterSocket() {
 
       sun.sun_family = AF_UNIX;
       std::strcpy(sun.sun_path, socket_path.c_str());
+      sun.sun_path[0] = '\0'; // Mark as an abstract namespace socket.
 
       return sun;
     }
@@ -102,26 +103,7 @@ void TerrierServer::RegisterSocket() {
   int status = bind(socket_fd, reinterpret_cast<struct sockaddr *>(&socket_addr), sizeof(socket_addr));
   if (status < 0) {
     NETWORK_LOG_ERROR("Failed to bind {} socket: {}", socket_description, strerror(errno), errno);
-
-    // We can recover from exactly one type of error here, contingent on this being a Unix domain socket.
-    if constexpr (!is_networked_socket) {
-      auto recovered = false;
-
-      if (errno == EADDRINUSE) {
-        // I find this disgusting, but it's the approach favored by a bunch of software that uses Unix domain sockets.
-        // BSD syslogd, for example, does this in *every* case--error handling or not--and I'm not one to question it.
-        recovered = !std::remove(fmt::format("{0}.s.PGSQL.{1}", socket_directory_, port_).c_str()) &&
-                    bind(socket_fd, reinterpret_cast<struct sockaddr *>(&socket_addr), sizeof(socket_addr)) >= 0;
-      }
-
-      if (recovered) {
-        NETWORK_LOG_INFO("Recovered! Managed to bind {} socket by purging a pre-existing bind.", socket_description)
-      } else {
-        throw NETWORK_PROCESS_EXCEPTION(fmt::format("Failed to bind and recover {} socket.", socket_description));
-      }
-    } else {
-      throw NETWORK_PROCESS_EXCEPTION(fmt::format("Failed to bind {} socket.", socket_description));
-    }
+    throw NETWORK_PROCESS_EXCEPTION(fmt::format("Failed to bind {} socket.", socket_description));
   }
 
   // Listen on the socket
@@ -165,13 +147,8 @@ void TerrierServer::StopServer() {
       thread_registry_->StopTask(this, dispatcher_task_.CastManagedPointerTo<common::DedicatedThreadTask>());
   TERRIER_ASSERT(result, "Failed to stop ConnectionDispatcherTask.");
 
-  // Close the network socket
+  // Close the network socket. The Unix domain socket gets removed automatically if it exists.
   TerrierClose(network_socket_fd_);
-
-  // Close the Unix domain socket if it exists
-  if (use_unix_socket_ && unix_domain_socket_fd_ >= 0) {
-    std::remove(fmt::format("{0}.s.PGSQL.{1}", socket_directory_, port_).c_str());
-  }
 
   NETWORK_LOG_INFO("Server Closed");
 

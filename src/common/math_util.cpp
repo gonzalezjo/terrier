@@ -1,7 +1,5 @@
 #include "common/math_util.h"
 
-#include <cmath>
-
 namespace terrier::common {
 
 bool MathUtil::ApproxEqual(float left, float right) {

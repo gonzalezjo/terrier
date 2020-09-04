@@ -3,11 +3,7 @@
 #include <tbb/enumerable_thread_specific.h>
 #include <tbb/parallel_for_each.h>
 
-#include <memory>
-#include <vector>
-
 #include "common/constants.h"
-#include "execution/exec/execution_settings.h"
 
 namespace terrier::execution::sql {
 

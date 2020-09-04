@@ -1,10 +1,5 @@
 #include "execution/sql/chaining_hash_table.h"
 
-#include <algorithm>
-#include <limits>
-
-#include "common/math_util.h"
-
 namespace terrier::execution::sql {
 
 //===----------------------------------------------------------------------===//

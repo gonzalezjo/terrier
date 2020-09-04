@@ -1,15 +1,10 @@
 #include "execution/compiler/compilation_context.h"
 
-#include <algorithm>
-#include <atomic>
 #include <sstream>
 
 #include "brain/operating_unit_recorder.h"
 #include "common/error/exception.h"
-#include "common/macros.h"
 #include "execution/ast/context.h"
-#include "execution/compiler/codegen.h"
-#include "execution/compiler/executable_query.h"
 #include "execution/compiler/executable_query_builder.h"
 #include "execution/compiler/expression/arithmetic_translator.h"
 #include "execution/compiler/expression/column_value_translator.h"
@@ -22,7 +17,6 @@
 #include "execution/compiler/expression/param_value_translator.h"
 #include "execution/compiler/expression/star_translator.h"
 #include "execution/compiler/expression/unary_translator.h"
-#include "execution/compiler/function_builder.h"
 #include "execution/compiler/operator/csv_scan_translator.h"
 #include "execution/compiler/operator/delete_translator.h"
 #include "execution/compiler/operator/hash_aggregation_translator.h"
@@ -33,14 +27,12 @@
 #include "execution/compiler/operator/insert_translator.h"
 #include "execution/compiler/operator/limit_translator.h"
 #include "execution/compiler/operator/nested_loop_join_translator.h"
-#include "execution/compiler/operator/operator_translator.h"
 #include "execution/compiler/operator/output_translator.h"
 #include "execution/compiler/operator/projection_translator.h"
 #include "execution/compiler/operator/seq_scan_translator.h"
 #include "execution/compiler/operator/sort_translator.h"
 #include "execution/compiler/operator/static_aggregation_translator.h"
 #include "execution/compiler/operator/update_translator.h"
-#include "execution/compiler/pipeline.h"
 #include "parser/expression/abstract_expression.h"
 #include "parser/expression/column_value_expression.h"
 #include "parser/expression/comparison_expression.h"
@@ -67,7 +59,6 @@
 #include "planner/plannodes/seq_scan_plan_node.h"
 #include "planner/plannodes/set_op_plan_node.h"
 #include "planner/plannodes/update_plan_node.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace terrier::execution::compiler {
 

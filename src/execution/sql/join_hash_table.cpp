@@ -3,17 +3,9 @@
 #include <llvm/ADT/STLExtras.h>
 #include <tbb/parallel_for_each.h>
 
-#include <algorithm>
-#include <limits>
-#include <utility>
-#include <vector>
-
-#include "execution/sql/memory_pool.h"
 #include "execution/sql/thread_state_container.h"
 #include "execution/sql/vector.h"
 #include "execution/sql/vector_operations/unary_operation_executor.h"
-#include "execution/util/cpu_info.h"
-#include "execution/util/memory.h"
 #include "execution/util/timer.h"
 #include "libcount/hll.h"
 #include "loggers/execution_logger.h"

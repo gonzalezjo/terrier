@@ -1,15 +1,10 @@
 #include "optimizer/expression_node_contents.h"
 
-#include <memory>
-#include <vector>
-
-#include "parser/expression/abstract_expression.h"
 #include "parser/expression/aggregate_expression.h"
 #include "parser/expression/comparison_expression.h"
 #include "parser/expression/conjunction_expression.h"
 #include "parser/expression/operator_expression.h"
 #include "parser/expression/star_expression.h"
-#include "parser/expression_defs.h"
 #include "transaction/transaction_context.h"
 
 namespace terrier::optimizer {

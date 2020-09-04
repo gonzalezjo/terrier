@@ -1,16 +1,7 @@
 #include "parser/expression/constant_value_expression.h"
 
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
-#include "common/hash_util.h"
 #include "common/json.h"
-#include "execution/sql/runtime_types.h"
-#include "execution/sql/value.h"
 #include "execution/sql/value_util.h"
-#include "parser/expression/abstract_expression.h"
 #include "spdlog/fmt/fmt.h"
 
 namespace terrier::parser {

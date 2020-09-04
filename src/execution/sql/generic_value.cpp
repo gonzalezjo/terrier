@@ -1,9 +1,6 @@
 #include "execution/sql/generic_value.h"
 
-#include <string>
-
 #include "common/error/exception.h"
-#include "common/math_util.h"
 #include "execution/sql/constant_vector.h"
 #include "execution/sql/value.h"
 #include "execution/sql/vector_operations/vector_operations.h"

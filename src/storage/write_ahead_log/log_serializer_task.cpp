@@ -1,8 +1,5 @@
 #include "storage/write_ahead_log/log_serializer_task.h"
 
-#include <queue>
-#include <utility>
-
 #include "common/scoped_timer.h"
 #include "common/thread_context.h"
 #include "metrics/metrics_store.h"

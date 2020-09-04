@@ -1,11 +1,7 @@
 #include "storage/projected_row.h"
-#include <algorithm>
-#include <cstring>
-#include <functional>
+
 #include <numeric>
 #include <set>
-#include <utility>
-#include <vector>
 
 #include "storage/block_layout.h"
 

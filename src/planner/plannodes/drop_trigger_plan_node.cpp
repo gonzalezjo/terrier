@@ -1,10 +1,5 @@
 #include "planner/plannodes/drop_trigger_plan_node.h"
 
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
 #include "common/json.h"
 
 namespace terrier::planner {

@@ -1,18 +1,7 @@
 #include "binder/binder_context.h"
 
-#include <algorithm>
-#include <memory>
-#include <string>
-#include <tuple>
-#include <unordered_map>
-#include <utility>
-#include <vector>
-
-#include "catalog/catalog_accessor.h"
-#include "common/error/exception.h"
 #include "parser/expression/column_value_expression.h"
 #include "parser/postgresparser.h"
-#include "parser/table_ref.h"
 
 namespace terrier::binder {
 

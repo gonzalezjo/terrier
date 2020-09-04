@@ -1,11 +1,9 @@
 #include "execution/vm/vm.h"
 
 #include <numeric>
-#include <string>
 
 #include "execution/sql/value.h"
 #include "execution/util/memory.h"
-#include "execution/vm/bytecode_function_info.h"
 #include "execution/vm/bytecode_handlers.h"
 #include "execution/vm/module.h"
 #include "loggers/execution_logger.h"

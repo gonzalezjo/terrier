@@ -1,11 +1,7 @@
 #include "execution/util/file.h"
 
 #include <fcntl.h>
-#include <sys/stat.h>
 #include <unistd.h>
-
-#include <cerrno>
-#include <cstdint>
 
 #include "execution/util/execution_common.h"
 

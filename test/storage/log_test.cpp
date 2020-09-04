@@ -1,23 +1,13 @@
 #include <future>  // NOLINT
-#include <memory>
-#include <string>
 #include <unordered_map>
 #include <vector>
 
 #include "common/dedicated_thread_registry.h"
-#include "common/managed_pointer.h"
 #include "gtest/gtest.h"
 #include "main/db_main.h"
-#include "storage/projected_row.h"
 #include "storage/sql_table.h"
-#include "storage/storage_defs.h"
-#include "storage/write_ahead_log/log_manager.h"
 #include "test_util/catalog_test_util.h"
 #include "test_util/data_table_test_util.h"
-#include "test_util/storage_test_util.h"
-#include "test_util/test_harness.h"
-#include "transaction/deferred_action_manager.h"
-#include "transaction/transaction_manager.h"
 
 #define LOG_FILE_NAME "./test.log"
 

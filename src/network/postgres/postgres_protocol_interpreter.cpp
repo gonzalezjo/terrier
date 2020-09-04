@@ -1,13 +1,5 @@
 #include "network/postgres/postgres_protocol_interpreter.h"
 
-#include <algorithm>
-#include <memory>
-#include <string>
-#include <thread>  // NOLINT
-#include <utility>
-
-#include "network/network_defs.h"
-#include "network/postgres/postgres_network_commands.h"
 #include "network/terrier_server.h"
 
 constexpr uint32_t SSL_MESSAGE_VERNO = 80877103;

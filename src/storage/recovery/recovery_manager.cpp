@@ -1,25 +1,8 @@
 #include "storage/recovery/recovery_manager.h"
 
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <vector>
-
-#include "catalog/postgres/pg_attribute.h"
-#include "catalog/postgres/pg_class.h"
-#include "catalog/postgres/pg_constraint.h"
-#include "catalog/postgres/pg_database.h"
-#include "catalog/postgres/pg_index.h"
-#include "catalog/postgres/pg_language.h"
-#include "catalog/postgres/pg_namespace.h"
-#include "catalog/postgres/pg_proc.h"
-#include "catalog/postgres/pg_type.h"
 #include "common/dedicated_thread_registry.h"
 #include "storage/index/index.h"
 #include "storage/index/index_builder.h"
-#include "storage/index/index_metadata.h"
 #include "storage/write_ahead_log/log_io.h"
 #include "transaction/deferred_action_manager.h"
 #include "transaction/transaction_manager.h"

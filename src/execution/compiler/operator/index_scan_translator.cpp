@@ -1,14 +1,10 @@
 #include "execution/compiler/operator/index_scan_translator.h"
 
-#include <unordered_map>
-
 #include "catalog/catalog_accessor.h"
 #include "execution/compiler/codegen.h"
 #include "execution/compiler/compilation_context.h"
-#include "execution/compiler/function_builder.h"
 #include "execution/compiler/if.h"
 #include "execution/compiler/loop.h"
-#include "execution/compiler/operator/operator_translator.h"
 #include "execution/compiler/work_context.h"
 #include "planner/plannodes/index_scan_plan_node.h"
 #include "storage/index/index.h"

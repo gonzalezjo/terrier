@@ -1,18 +1,8 @@
 #include "parser/postgresparser.h"
 
-#include <algorithm>
-#include <cstdio>
-#include <memory>
-#include <string>
 #include <unordered_set>
-#include <utility>
-#include <vector>
 
-#include "common/error/exception.h"
 #include "execution/sql/value_util.h"
-#include "libpg_query/pg_list.h"
-#include "libpg_query/pg_query.h"
-#include "loggers/parser_logger.h"
 #include "parser/expression/aggregate_expression.h"
 #include "parser/expression/case_expression.h"
 #include "parser/expression/column_value_expression.h"

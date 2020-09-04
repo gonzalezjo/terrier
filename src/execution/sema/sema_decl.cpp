@@ -1,6 +1,6 @@
 #include <llvm/ADT/DenseSet.h>
+
 #include "execution/ast/context.h"
-#include "execution/ast/type.h"
 #include "execution/sema/sema.h"
 
 namespace terrier::execution::sema {

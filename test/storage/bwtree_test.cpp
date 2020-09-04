@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <random>
-#include <vector>
+
 #include "bwtree/bloom_filter.h"
 #include "bwtree/sorted_small_set.h"
 #include "test_util/bwtree_test_util.h"

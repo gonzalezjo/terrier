@@ -1,20 +1,12 @@
 #include "optimizer/optimizer.h"
 
-#include <memory>
-#include <utility>
-#include <vector>
-
 #include "common/error/exception.h"
 #include "common/scoped_timer.h"
 #include "optimizer/binding.h"
 #include "optimizer/input_column_deriver.h"
-#include "optimizer/operator_visitor.h"
-#include "optimizer/optimization_context.h"
-#include "optimizer/optimizer_task_pool.h"
 #include "optimizer/plan_generator.h"
 #include "optimizer/properties.h"
 #include "optimizer/property_enforcer.h"
-#include "optimizer/rule.h"
 #include "planner/plannodes/abstract_plan_node.h"
 
 namespace terrier::optimizer {

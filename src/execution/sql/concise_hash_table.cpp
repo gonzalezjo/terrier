@@ -1,9 +1,5 @@
 #include "execution/sql/concise_hash_table.h"
 
-#include <algorithm>
-
-#include "execution/util/bit_util.h"
-
 namespace terrier::execution::sql {
 
 ConciseHashTable::ConciseHashTable(const uint32_t probe_threshold) : probe_limit_(probe_threshold) {}

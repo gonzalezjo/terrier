@@ -2,7 +2,6 @@
 
 #include "execution/compiler/compilation_context.h"
 #include "execution/compiler/operator/operator_translator.h"
-#include "execution/compiler/pipeline.h"
 
 namespace terrier::execution::compiler {
 

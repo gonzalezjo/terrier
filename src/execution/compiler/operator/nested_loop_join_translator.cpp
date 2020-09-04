@@ -2,7 +2,6 @@
 
 #include "execution/compiler/compilation_context.h"
 #include "execution/compiler/if.h"
-#include "execution/compiler/pipeline.h"
 #include "execution/compiler/work_context.h"
 #include "planner/plannodes/nested_loop_join_plan_node.h"
 

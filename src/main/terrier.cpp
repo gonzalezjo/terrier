@@ -3,12 +3,10 @@
 #include <csignal>
 #include <memory>
 #include <unordered_map>
-#include <utility>
 
 #include "common/managed_pointer.h"
 #include "loggers/loggers_util.h"
 #include "main/db_main.h"
-#include "settings/settings_manager.h"
 
 /**
  * Need a global pointer to access from SignalHandler, unfortunately. Do not remove from this anonymous namespace since

@@ -1,13 +1,9 @@
 #include "common/hash_util.h"
 
-#include <cstring>
 #include <iostream>
-#include <limits>
 #include <random>
-#include <string>
 #include <thread>  // NOLINT
 #include <unordered_set>
-#include <vector>
 
 #include "gtest/gtest.h"
 

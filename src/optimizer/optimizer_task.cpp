@@ -1,10 +1,5 @@
 #include "optimizer/optimizer_task.h"
 
-#include <algorithm>
-#include <functional>
-#include <memory>
-#include <vector>
-
 #include "loggers/optimizer_logger.h"
 #include "optimizer/binding.h"
 #include "optimizer/child_property_deriver.h"

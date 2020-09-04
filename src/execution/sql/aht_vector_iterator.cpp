@@ -1,9 +1,7 @@
 #include <memory>
-#include <utility>
 #include <vector>
 
 #include "execution/sql/aggregation_hash_table.h"
-#include "execution/sql/vector_projection.h"
 #include "execution/sql/vector_projection_iterator.h"
 
 namespace terrier::execution::sql {

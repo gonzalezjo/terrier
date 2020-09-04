@@ -1,9 +1,5 @@
 #include "parser/select_statement.h"
 
-#include <memory>
-#include <utility>
-#include <vector>
-
 #include "common/json.h"
 
 namespace terrier::parser {

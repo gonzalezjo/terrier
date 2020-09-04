@@ -1,23 +1,13 @@
 #include "catalog/catalog.h"
 
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
-#include "catalog/catalog_accessor.h"
 #include "catalog/catalog_cache.h"
 #include "catalog/database_catalog.h"
 #include "catalog/postgres/builder.h"
 #include "catalog/postgres/pg_database.h"
 #include "storage/index/index.h"
-#include "storage/projected_columns.h"
-#include "storage/projected_row.h"
 #include "storage/sql_table.h"
-#include "storage/storage_defs.h"
 #include "transaction/deferred_action_manager.h"
 #include "transaction/transaction_manager.h"
-#include "transaction/transaction_util.h"
 
 namespace terrier::catalog {
 

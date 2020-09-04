@@ -1,45 +1,28 @@
 #include "traffic_cop/traffic_cop.h"
 
 #include <future>  // NOLINT
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
 
 #include "binder/bind_node_visitor.h"
 #include "binder/binder_util.h"
 #include "catalog/catalog.h"
-#include "catalog/catalog_accessor.h"
-#include "common/error/error_data.h"
-#include "common/error/exception.h"
 #include "execution/compiler/compilation_context.h"
-#include "execution/compiler/executable_query.h"
 #include "execution/exec/execution_context.h"
 #include "execution/exec/execution_settings.h"
-#include "execution/exec/output.h"
 #include "execution/sql/ddl_executors.h"
 #include "execution/vm/module.h"
 #include "network/connection_context.h"
 #include "network/postgres/portal.h"
 #include "network/postgres/postgres_packet_writer.h"
 #include "network/postgres/postgres_protocol_interpreter.h"
-#include "network/postgres/statement.h"
 #include "optimizer/abstract_optimizer.h"
 #include "optimizer/cost_model/trivial_cost_model.h"
-#include "optimizer/operator_node.h"
 #include "optimizer/optimizer.h"
 #include "optimizer/properties.h"
-#include "optimizer/property_set.h"
 #include "optimizer/query_to_operator_transformer.h"
-#include "optimizer/statistics/stats_storage.h"
 #include "parser/drop_statement.h"
-#include "parser/postgresparser.h"
 #include "parser/variable_set_statement.h"
-#include "planner/plannodes/abstract_plan_node.h"
 #include "settings/settings_manager.h"
 #include "storage/recovery/replication_log_provider.h"
-#include "traffic_cop/traffic_cop_defs.h"
-#include "traffic_cop/traffic_cop_util.h"
 #include "transaction/transaction_manager.h"
 
 namespace terrier::trafficcop {

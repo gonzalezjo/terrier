@@ -1,8 +1,5 @@
 #include "transaction/transaction_manager.h"
 
-#include <unordered_set>
-#include <utility>
-
 #include "common/scoped_timer.h"
 #include "common/thread_context.h"
 #include "metrics/metrics_store.h"

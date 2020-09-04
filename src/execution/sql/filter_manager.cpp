@@ -1,8 +1,5 @@
 #include "execution/sql/filter_manager.h"
 
-#include <algorithm>
-
-#include "common/settings.h"
 #include "execution/exec/execution_settings.h"
 #include "execution/sql/vector_projection.h"
 #include "execution/sql/vector_projection_iterator.h"

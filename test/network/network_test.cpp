@@ -1,12 +1,9 @@
 #include <cstring>
 #include <memory>
 #include <pqxx/pqxx>  // NOLINT
-#include <string>
 #include <thread>  // NOLINT
-#include <vector>
 
 #include "catalog/catalog.h"
-#include "common/managed_pointer.h"
 #include "common/settings.h"
 #include "gtest/gtest.h"
 #include "network/connection_handle_factory.h"
@@ -15,7 +12,6 @@
 #include "storage/garbage_collector.h"
 #include "test_util/manual_packet_util.h"
 #include "test_util/test_harness.h"
-#include "traffic_cop/traffic_cop.h"
 #include "transaction/deferred_action_manager.h"
 #include "transaction/transaction_manager.h"
 

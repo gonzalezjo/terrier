@@ -1,24 +1,15 @@
 #include <memory>
-#include <string>
 #include <unordered_map>
 #include <vector>
 
 #include "catalog/catalog.h"
-#include "catalog/postgres/pg_namespace.h"
 #include "gtest/gtest.h"
 #include "main/db_main.h"
-#include "storage/garbage_collector_thread.h"
 #include "storage/index/index_builder.h"
 #include "storage/recovery/disk_log_provider.h"
 #include "storage/recovery/recovery_manager.h"
-#include "storage/sql_table.h"
-#include "storage/write_ahead_log/log_manager.h"
 #include "test_util/catalog_test_util.h"
 #include "test_util/sql_table_test_util.h"
-#include "test_util/storage_test_util.h"
-#include "test_util/test_harness.h"
-#include "transaction/transaction_context.h"
-#include "transaction/transaction_manager.h"
 
 // Make sure that if you create additional files, you call unlink on them after the test finishes. Otherwise, repeated
 // executions will read old test's data, and the cause of the errors will be hard to identify. Trust me it will drive

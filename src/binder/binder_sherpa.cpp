@@ -1,9 +1,6 @@
 #include "binder/binder_sherpa.h"
 
-#include <unordered_map>
-
 #include "binder/binder_util.h"
-#include "parser/expression/abstract_expression.h"
 #include "spdlog/fmt/fmt.h"
 namespace terrier::binder {
 

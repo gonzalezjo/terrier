@@ -1,11 +1,9 @@
 #include "execution/compiler/expression/param_value_translator.h"
 
-#include "common/error/exception.h"
 #include "execution/compiler/codegen.h"
 #include "execution/compiler/compilation_context.h"
 #include "execution/compiler/work_context.h"
 #include "parser/expression/parameter_value_expression.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace terrier::execution::compiler {
 

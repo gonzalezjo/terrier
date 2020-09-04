@@ -2,7 +2,6 @@
 
 #include "common/error/error_data.h"
 #include "execution/sql/value.h"
-#include "network/postgres/postgres_defs.h"
 #include "network/postgres/postgres_protocol_util.h"
 
 namespace terrier::network {

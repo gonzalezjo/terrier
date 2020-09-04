@@ -1,10 +1,5 @@
 #include "storage/recovery/abstract_log_provider.h"
 
-#include <utility>
-#include <vector>
-
-#include "storage/projected_row.h"
-
 namespace terrier::storage {
 
 std::pair<LogRecord *, std::vector<byte *>> AbstractLogProvider::ReadNextRecord() {

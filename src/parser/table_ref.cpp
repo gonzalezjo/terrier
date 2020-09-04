@@ -1,11 +1,6 @@
 #include "parser/table_ref.h"
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
 
 #include "common/json.h"
-#include "parser/select_statement.h"
 
 namespace terrier::parser {
 

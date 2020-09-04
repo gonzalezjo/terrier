@@ -1,7 +1,5 @@
 #include "settings/settings_callbacks.h"
 
-#include <memory>
-
 #include "main/db_main.h"
 
 namespace terrier::settings {

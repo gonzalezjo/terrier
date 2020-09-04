@@ -1,11 +1,10 @@
-#include <memory>
-#include <utility>
+#include "optimizer/statistics/table_stats.h"
 
-#include "loggers/optimizer_logger.h"
+#include <memory>
 
 #include "common/json.h"
+#include "loggers/optimizer_logger.h"
 #include "optimizer/statistics/column_stats.h"
-#include "optimizer/statistics/table_stats.h"
 
 namespace terrier::optimizer {
 

@@ -1,11 +1,5 @@
 #include "execution/vm/bytecode_handlers.h"
 
-#include "catalog/catalog_defs.h"
-#include "execution/exec/execution_context.h"
-#include "execution/sql/index_iterator.h"
-#include "execution/sql/storage_interface.h"
-#include "execution/sql/vector_projection_iterator.h"
-
 extern "C" {
 
 // ---------------------------------------------------------

@@ -1,12 +1,5 @@
 #include "execution/sql/vector_projection.h"
 
-#include <memory>
-#include <numeric>
-#include <string>
-#include <vector>
-
-#include "execution/sql/tuple_id_list.h"
-#include "execution/sql/vector.h"
 #include "execution/sql/vector_operations/vector_operations.h"
 #include "storage/storage_util.h"
 

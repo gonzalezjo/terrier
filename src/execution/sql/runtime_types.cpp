@@ -1,7 +1,5 @@
 #include "execution/sql/runtime_types.h"
 
-#include <string>
-
 #include "common/error/exception.h"
 #include "spdlog/fmt/fmt.h"
 

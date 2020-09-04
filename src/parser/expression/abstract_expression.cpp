@@ -1,10 +1,5 @@
 #include "parser/expression/abstract_expression.h"
 
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
 #include "common/json.h"
 #include "parser/expression/aggregate_expression.h"
 #include "parser/expression/case_expression.h"

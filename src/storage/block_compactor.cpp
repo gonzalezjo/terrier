@@ -1,14 +1,7 @@
 #include "storage/block_compactor.h"
 
-#include <algorithm>
-#include <queue>
-#include <unordered_map>
-#include <utility>
-#include <vector>
-
 #include "storage/sql_table.h"
 #include "transaction/deferred_action_manager.h"
-#include "transaction/transaction_util.h"
 
 namespace terrier::storage {
 void BlockCompactor::ProcessCompactionQueue(transaction::DeferredActionManager *deferred_action_manager,

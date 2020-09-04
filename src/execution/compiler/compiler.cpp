@@ -3,8 +3,6 @@
 #include "execution/ast/ast_pretty_print.h"
 #include "execution/ast/context.h"
 #include "execution/parsing/parser.h"
-#include "execution/parsing/scanner.h"
-#include "execution/sema/error_reporter.h"
 #include "execution/sema/sema.h"
 #include "execution/vm/bytecode_generator.h"
 #include "execution/vm/module.h"

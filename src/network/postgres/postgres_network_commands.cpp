@@ -1,7 +1,5 @@
 #include "network/postgres/postgres_network_commands.h"
 
-#include <memory>
-#include <string>
 #include <variant>
 
 #include "common/thread_context.h"
@@ -9,8 +7,6 @@
 #include "network/network_util.h"
 #include "network/postgres/postgres_packet_util.h"
 #include "network/postgres/postgres_protocol_interpreter.h"
-#include "network/postgres/statement.h"
-#include "traffic_cop/traffic_cop.h"
 
 namespace terrier::network {
 

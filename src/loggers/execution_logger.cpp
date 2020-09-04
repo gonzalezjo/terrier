@@ -1,7 +1,5 @@
 #include "loggers/execution_logger.h"
 
-#include <memory>
-
 namespace terrier::execution {
 
 std::shared_ptr<spdlog::logger> execution_logger = nullptr;  // NOLINT

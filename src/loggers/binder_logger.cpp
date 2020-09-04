@@ -1,7 +1,5 @@
 #include "loggers/binder_logger.h"
 
-#include <memory>
-
 namespace terrier::binder {
 
 std::shared_ptr<spdlog::logger> binder_logger = nullptr;  // NOLINT

@@ -1,13 +1,9 @@
 #include "execution/compiler/pipeline.h"
 
-#include <algorithm>
-
-#include "common/macros.h"
 #include "common/settings.h"
 #include "execution/compiler/codegen.h"
 #include "execution/compiler/compilation_context.h"
 #include "execution/compiler/executable_query_builder.h"
-#include "execution/compiler/function_builder.h"
 #include "execution/compiler/operator/operator_translator.h"
 #include "execution/compiler/pipeline_driver.h"
 #include "execution/compiler/work_context.h"
@@ -15,7 +11,6 @@
 #include "loggers/execution_logger.h"
 #include "metrics/metrics_defs.h"
 #include "planner/plannodes/abstract_plan_node.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace terrier::execution::compiler {
 

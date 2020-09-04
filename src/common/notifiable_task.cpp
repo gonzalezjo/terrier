@@ -1,10 +1,5 @@
 #include "common/notifiable_task.h"
 
-#include <cstring>
-
-#include "common/event_util.h"
-#include "loggers/common_logger.h"
-
 namespace terrier::common {
 
 NotifiableTask::NotifiableTask(int task_id) : task_id_(task_id) {

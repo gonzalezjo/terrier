@@ -1,6 +1,4 @@
 #include "transaction/timestamp_manager.h"
-#include <algorithm>
-#include <vector>
 
 namespace terrier::transaction {
 

@@ -1,10 +1,7 @@
 #include "execution/compiler/codegen.h"
 
 #include "common/error/exception.h"
-#include "execution/ast/ast_node_factory.h"
-#include "execution/ast/builtins.h"
 #include "execution/ast/context.h"
-#include "execution/ast/type.h"
 #include "execution/compiler/executable_query_builder.h"
 #include "spdlog/fmt/fmt.h"
 #include "storage/index/index_defs.h"

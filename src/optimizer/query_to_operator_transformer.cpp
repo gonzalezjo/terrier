@@ -1,17 +1,8 @@
 #include "optimizer/query_to_operator_transformer.h"
 
-#include <algorithm>
 #include <cmath>
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <vector>
 
 #include "catalog/catalog_accessor.h"
-#include "common/macros.h"
-#include "common/managed_pointer.h"
 #include "loggers/optimizer_logger.h"
 #include "optimizer/logical_operators.h"
 #include "optimizer/operator_node.h"
@@ -21,8 +12,6 @@
 #include "parser/expression/subquery_expression.h"
 #include "parser/expression_util.h"
 #include "parser/postgresparser.h"
-#include "parser/statements.h"
-#include "planner/plannodes/plan_node_defs.h"
 
 namespace terrier::optimizer {
 

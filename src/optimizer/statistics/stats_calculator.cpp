@@ -1,24 +1,12 @@
 #include "optimizer/statistics/stats_calculator.h"
 
-#include <algorithm>
 #include <cmath>
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <utility>
-#include <vector>
 
 #include "catalog/catalog_accessor.h"
 #include "optimizer/logical_operators.h"
-#include "optimizer/memo.h"
 #include "optimizer/optimizer_context.h"
 #include "optimizer/physical_operators.h"
-#include "optimizer/statistics/column_stats.h"
 #include "optimizer/statistics/selectivity.h"
-#include "optimizer/statistics/stats_storage.h"
-#include "optimizer/statistics/table_stats.h"
-#include "optimizer/statistics/value_condition.h"
-#include "parser/expression/column_value_expression.h"
 #include "parser/expression/constant_value_expression.h"
 #include "parser/expression_util.h"
 

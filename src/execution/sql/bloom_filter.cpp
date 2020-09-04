@@ -1,9 +1,5 @@
 #include "execution/sql/bloom_filter.h"
 
-#include <limits>
-#include <string>
-#include <vector>
-
 #include "execution/util/bit_util.h"
 #include "execution/util/simd.h"
 #include "loggers/execution_logger.h"

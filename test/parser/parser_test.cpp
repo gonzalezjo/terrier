@@ -1,16 +1,11 @@
 #include <memory>
-#include <string>
-#include <utility>
 #include <vector>
 
 #include "common/error/exception.h"
 #include "common/managed_pointer.h"
 #include "parser/expression/aggregate_expression.h"
-#include "parser/expression/case_expression.h"
 #include "parser/expression/column_value_expression.h"
-#include "parser/expression/comparison_expression.h"
 #include "parser/expression/constant_value_expression.h"
-#include "parser/expression/default_value_expression.h"
 #include "parser/expression/function_expression.h"
 #include "parser/expression/operator_expression.h"
 #include "parser/expression/type_cast_expression.h"

@@ -1,11 +1,6 @@
 #include "storage/block_layout.h"
 
-#include <algorithm>
-#include <utility>
-#include <vector>
-
 #include "storage/arrow_block_metadata.h"
-#include "storage/storage_util.h"
 
 namespace terrier::storage {
 BlockLayout::BlockLayout(std::vector<uint16_t> attr_sizes)

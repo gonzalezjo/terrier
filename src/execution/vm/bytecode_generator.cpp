@@ -1,21 +1,12 @@
 #include "execution/vm/bytecode_generator.h"
 
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
 #include "common/error/exception.h"
-#include "common/macros.h"
-#include "execution/ast/builtins.h"
 #include "execution/ast/context.h"
-#include "execution/ast/type.h"
 #include "execution/sql/sql_def.h"
 #include "execution/vm/bytecode_label.h"
 #include "execution/vm/bytecode_module.h"
 #include "execution/vm/control_flow_builders.h"
 #include "loggers/execution_logger.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace terrier::execution::vm {
 

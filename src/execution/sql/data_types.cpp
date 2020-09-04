@@ -2,10 +2,6 @@
 
 #include <llvm/ADT/DenseMap.h>
 
-#include <memory>
-#include <string>
-#include <utility>
-
 namespace terrier::execution::sql {
 
 // ---------------------------------------------------------

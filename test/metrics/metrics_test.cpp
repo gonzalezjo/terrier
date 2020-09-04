@@ -1,20 +1,13 @@
 #include <memory>
 #include <random>
-#include <string>
 #include <thread>  //NOLINT
 #include <unordered_map>
-#include <utility>
 
 #include "main/db_main.h"
-#include "metrics/metrics_manager.h"
-#include "metrics/metrics_store.h"
 #include "settings/settings_callbacks.h"
-#include "settings/settings_manager.h"
 #include "storage/sql_table.h"
 #include "test_util/catalog_test_util.h"
 #include "test_util/test_harness.h"
-#include "transaction/transaction_defs.h"
-#include "transaction/transaction_manager.h"
 
 namespace terrier::metrics {
 

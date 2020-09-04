@@ -1,11 +1,6 @@
 #include "execution/sql/ddl_executors.h"
 
-#include <memory>
-#include <string>
-#include <vector>
-
 #include "catalog/catalog_accessor.h"
-#include "common/macros.h"
 #include "execution/exec/execution_context.h"
 #include "parser/expression/column_value_expression.h"
 #include "planner/plannodes/create_database_plan_node.h"

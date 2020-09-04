@@ -1,9 +1,5 @@
 #include "execution/vm/bytecode_function_info.h"
 
-#include <string>
-#include <utility>
-#include <vector>
-
 #include "common/math_util.h"
 #include "execution/ast/type.h"
 

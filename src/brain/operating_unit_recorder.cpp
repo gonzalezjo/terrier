@@ -1,23 +1,17 @@
 #include "brain/operating_unit_recorder.h"
 
-#include <utility>
-
-#include "brain/operating_unit.h"
 #include "brain/operating_unit_util.h"
 #include "catalog/catalog_accessor.h"
 #include "execution/ast/ast.h"
 #include "execution/ast/context.h"
-#include "execution/ast/type.h"
 #include "execution/compiler/operator/hash_aggregation_translator.h"
 #include "execution/compiler/operator/hash_join_translator.h"
-#include "execution/compiler/operator/operator_translator.h"
 #include "execution/compiler/operator/sort_translator.h"
 #include "execution/compiler/operator/static_aggregation_translator.h"
 #include "execution/sql/aggregators.h"
 #include "execution/sql/hash_table_entry.h"
 #include "parser/expression/constant_value_expression.h"
 #include "parser/expression/function_expression.h"
-#include "parser/expression_defs.h"
 #include "planner/plannodes/abstract_join_plan_node.h"
 #include "planner/plannodes/aggregate_plan_node.h"
 #include "planner/plannodes/analyze_plan_node.h"
@@ -44,12 +38,10 @@
 #include "planner/plannodes/limit_plan_node.h"
 #include "planner/plannodes/nested_loop_join_plan_node.h"
 #include "planner/plannodes/order_by_plan_node.h"
-#include "planner/plannodes/plan_visitor.h"
 #include "planner/plannodes/projection_plan_node.h"
 #include "planner/plannodes/seq_scan_plan_node.h"
 #include "planner/plannodes/update_plan_node.h"
 #include "storage/block_layout.h"
-#include "type/type_id.h"
 
 namespace terrier::brain {
 

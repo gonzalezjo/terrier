@@ -1,7 +1,5 @@
 #include "execution/sql/vector_operations/vector_operations.h"
 
-#include "execution/sql/tuple_id_list.h"
-
 namespace terrier::execution::sql {
 
 void VectorOps::IsNull(const Vector &input, TupleIdList *tid_list) {

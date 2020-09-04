@@ -1,8 +1,5 @@
 #include "execution/vm/bytecode_emitter.h"
 
-#include <limits>
-#include <vector>
-
 #include "execution/vm/bytecode_label.h"
 
 namespace terrier::execution::vm {

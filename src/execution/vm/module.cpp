@@ -2,11 +2,6 @@
 
 #include <tbb/task.h>  // NOLINT
 
-#include <memory>
-#include <mutex>  // NOLINT
-#include <string>
-#include <utility>
-
 #include "loggers/execution_logger.h"
 
 #define XBYAK_NO_OP_NAMES

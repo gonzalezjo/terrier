@@ -1,8 +1,6 @@
 #include "optimizer/statistics/selectivity.h"
 
-#include "loggers/optimizer_logger.h"
 #include "parser/expression/constant_value_expression.h"
-#include "parser/expression_defs.h"
 
 namespace terrier::optimizer {
 

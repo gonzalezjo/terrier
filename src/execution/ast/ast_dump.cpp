@@ -2,10 +2,6 @@
 
 #include <llvm/ADT/SmallString.h>
 #include <llvm/Support/raw_os_ostream.h>
-#include <llvm/Support/raw_ostream.h>
-
-#include <string>
-#include <utility>
 
 #include "execution/ast/ast.h"
 #include "execution/ast/ast_visitor.h"

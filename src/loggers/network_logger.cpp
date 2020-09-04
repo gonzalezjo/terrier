@@ -1,7 +1,5 @@
 #include "loggers/network_logger.h"
 
-#include <memory>
-
 namespace terrier::network {
 
 std::shared_ptr<spdlog::logger> network_logger = nullptr;  // NOLINT

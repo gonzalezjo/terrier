@@ -1,24 +1,12 @@
 #include "catalog/catalog.h"
 
-#include <algorithm>
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
-#include "catalog/catalog_accessor.h"
-#include "catalog/catalog_defs.h"
 #include "catalog/database_catalog.h"
-#include "catalog/postgres/pg_namespace.h"
 #include "execution/functions/function_context.h"
 #include "main/db_main.h"
 #include "parser/expression/column_value_expression.h"
-#include "parser/expression/constant_value_expression.h"
 #include "storage/index/index_builder.h"
 #include "storage/sql_table.h"
 #include "test_util/test_harness.h"
-#include "transaction/transaction_manager.h"
-#include "transaction/transaction_util.h"
 
 namespace terrier {
 

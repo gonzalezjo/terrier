@@ -1,7 +1,5 @@
 #include "execution/compiler/executable_query.h"
 
-#include <algorithm>
-
 #include "brain/operating_unit.h"
 #include "common/error/error_code.h"
 #include "common/error/exception.h"

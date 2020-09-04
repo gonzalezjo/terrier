@@ -1,7 +1,5 @@
 #include "loggers/catalog_logger.h"
 
-#include <memory>
-
 namespace terrier::catalog {
 
 std::shared_ptr<spdlog::logger> catalog_logger = nullptr;  // NOLINT

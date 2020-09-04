@@ -1,7 +1,6 @@
 #include "loggers/loggers_util.h"
 
 #include <iostream>
-#include <memory>
 
 #include "loggers/binder_logger.h"
 #include "loggers/catalog_logger.h"

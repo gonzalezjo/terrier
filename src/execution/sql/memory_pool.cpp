@@ -1,8 +1,5 @@
 #include "execution/sql/memory_pool.h"
 
-#include <cstdlib>
-#include <memory>
-
 #include "common/constants.h"
 #include "execution/sql/memory_tracker.h"
 #include "execution/util/memory.h"

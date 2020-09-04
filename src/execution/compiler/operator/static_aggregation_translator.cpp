@@ -1,7 +1,6 @@
 #include "execution/compiler/operator/static_aggregation_translator.h"
 
 #include "execution/compiler/compilation_context.h"
-#include "execution/compiler/function_builder.h"
 #include "execution/compiler/if.h"
 #include "execution/compiler/work_context.h"
 #include "planner/plannodes/aggregate_plan_node.h"

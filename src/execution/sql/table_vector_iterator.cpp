@@ -3,14 +3,8 @@
 #include <tbb/parallel_for.h>
 #include <tbb/task_scheduler_init.h>
 
-#include <limits>
-#include <numeric>
-#include <utility>
-#include <vector>
-
 #include "catalog/catalog_accessor.h"
 #include "execution/exec/execution_context.h"
-#include "execution/sql/thread_state_container.h"
 #include "execution/util/timer.h"
 #include "loggers/execution_logger.h"
 

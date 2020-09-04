@@ -1,12 +1,6 @@
 #include "storage/sql_table.h"
 
-#include <map>
-#include <string>
-#include <vector>
-
 #include "catalog/schema.h"
-#include "common/macros.h"
-#include "storage/storage_util.h"
 
 namespace terrier::storage {
 

@@ -1,14 +1,5 @@
 #include "network/postgres/statement.h"
 
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
-#include "parser/postgresparser.h"
-#include "traffic_cop/traffic_cop_util.h"
-#include "type/type_id.h"
-
 namespace terrier::network {
 
 Statement::Statement(std::string &&query_text, std::unique_ptr<parser::ParseResult> &&parse_result,

@@ -4,8 +4,6 @@
 #include "common/hash_util.h"
 #include "optimizer/expression_node_contents.h"
 #include "optimizer/group.h"
-#include "optimizer/group_expression.h"
-#include "optimizer/rule.h"
 
 namespace terrier::optimizer {
 

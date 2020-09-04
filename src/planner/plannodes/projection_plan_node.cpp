@@ -1,8 +1,5 @@
 #include "planner/plannodes/projection_plan_node.h"
 
-#include <memory>
-#include <vector>
-
 #include "common/json.h"
 
 namespace terrier::planner {

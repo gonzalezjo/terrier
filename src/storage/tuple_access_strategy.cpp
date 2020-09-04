@@ -1,9 +1,5 @@
 #include "storage/tuple_access_strategy.h"
 
-#include <utility>
-
-#include "common/container/concurrent_bitmap.h"
-
 namespace terrier::storage {
 
 TupleAccessStrategy::TupleAccessStrategy(BlockLayout layout)

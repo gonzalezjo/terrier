@@ -1,9 +1,6 @@
 #include "execution/sql/tuple_id_list.h"
 
 #include <iostream>
-#include <string>
-
-#include "execution/util/vector_util.h"
 
 namespace terrier::execution::sql {
 

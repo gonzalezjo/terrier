@@ -1,13 +1,5 @@
 #include "execution/parsing/parser.h"
 
-#include <memory>
-#include <string>
-#include <tuple>
-#include <unordered_set>
-#include <utility>
-
-#include "execution/sema/error_reporter.h"
-
 namespace terrier::execution::parsing {
 
 static std::unordered_set<Token::Type> k_top_level_decls = {Token::Type::STRUCT, Token::Type::FUN};

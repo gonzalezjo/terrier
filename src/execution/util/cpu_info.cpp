@@ -10,16 +10,11 @@
 #include <llvm/ADT/StringRef.h>
 #include <unistd.h>
 
-#include <algorithm>
 #include <fstream>
 #include <iomanip>
-#include <memory>
 #include <regex>  // NOLINT
-#include <sstream>
-#include <string>
 #include <unordered_set>
 
-#include "common/macros.h"
 #include "loggers/execution_logger.h"
 
 namespace terrier::execution {

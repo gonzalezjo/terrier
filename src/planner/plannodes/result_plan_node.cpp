@@ -1,9 +1,5 @@
 #include "planner/plannodes/result_plan_node.h"
 
-#include <memory>
-#include <utility>
-#include <vector>
-
 #include "common/json.h"
 
 namespace terrier::planner {

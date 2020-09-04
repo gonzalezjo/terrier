@@ -1,7 +1,5 @@
 #include "execution/compiler/state_descriptor.h"
 
-#include <utility>
-
 #include "execution/compiler/codegen.h"
 #include "execution/compiler/function_builder.h"
 

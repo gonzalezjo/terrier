@@ -1,12 +1,5 @@
 #include "metrics/metrics_manager.h"
 
-#include <sys/stat.h>
-#include <fstream>
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
 namespace terrier::metrics {
 
 bool FileExists(const std::string &path) {

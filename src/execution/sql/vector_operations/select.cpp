@@ -2,7 +2,6 @@
 #include "execution/exec/execution_settings.h"
 #include "execution/sql/operators/comparison_operators.h"
 #include "execution/sql/operators/like_operators.h"
-#include "execution/sql/runtime_types.h"
 #include "execution/sql/tuple_id_list.h"
 #include "execution/sql/vector_operations/vector_operations.h"
 #include "spdlog/fmt/fmt.h"

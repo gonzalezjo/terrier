@@ -1,10 +1,6 @@
 #include "storage/projected_columns.h"
 
-#include <algorithm>
-#include <functional>
 #include <set>
-#include <utility>
-#include <vector>
 
 #include "storage/block_layout.h"
 

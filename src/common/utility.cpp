@@ -2,8 +2,6 @@
 
 #include <unistd.h>
 
-#include <cerrno>
-#include <string>
 #include <vector>
 
 #include "loggers/common_logger.h"

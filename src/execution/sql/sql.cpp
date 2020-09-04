@@ -1,10 +1,7 @@
 #include "execution/sql/sql.h"
 
-#include <string>
-
 #include "common/error/exception.h"
 #include "spdlog/fmt/fmt.h"
-#include "type/type_id.h"
 
 namespace terrier::execution::sql {
 

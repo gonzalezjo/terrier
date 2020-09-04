@@ -1,9 +1,5 @@
 #include "execution/parsing/scanner.h"
 
-#include <cassert>
-#include <stdexcept>
-#include <string>
-
 namespace terrier::execution::parsing {
 
 Scanner::Scanner(const std::string &source) : Scanner(source.data(), source.length()) {}

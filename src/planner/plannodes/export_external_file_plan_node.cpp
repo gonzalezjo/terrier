@@ -1,9 +1,5 @@
 #include "planner/plannodes/export_external_file_plan_node.h"
 
-#include <memory>
-#include <string>
-#include <vector>
-
 #include "common/json.h"
 
 namespace terrier::planner {

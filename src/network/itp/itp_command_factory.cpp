@@ -1,5 +1,4 @@
 #include "network/itp/itp_command_factory.h"
-#include <memory>
 namespace terrier::network {
 
 std::unique_ptr<ITPNetworkCommand> ITPCommandFactory::PacketToCommand(

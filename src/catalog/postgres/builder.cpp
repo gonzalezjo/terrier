@@ -1,22 +1,12 @@
 #include "catalog/postgres/builder.h"
 
-#include <utility>
-#include <vector>
-
 #include "catalog/database_catalog.h"
 #include "catalog/index_schema.h"
 #include "catalog/postgres/pg_attribute.h"
-#include "catalog/postgres/pg_class.h"
 #include "catalog/postgres/pg_constraint.h"
 #include "catalog/postgres/pg_database.h"
 #include "catalog/postgres/pg_index.h"
-#include "catalog/postgres/pg_language.h"
 #include "catalog/postgres/pg_namespace.h"
-#include "catalog/postgres/pg_proc.h"
-#include "catalog/postgres/pg_type.h"
-#include "catalog/schema.h"
-#include "parser/expression/abstract_expression.h"
-#include "parser/expression/column_value_expression.h"
 #include "parser/expression/constant_value_expression.h"
 #include "storage/index/index_builder.h"
 #include "storage/sql_table.h"

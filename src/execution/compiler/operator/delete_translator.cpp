@@ -1,11 +1,8 @@
 #include "execution/compiler/operator/delete_translator.h"
 
-#include <vector>
-
 #include "catalog/catalog_accessor.h"
 #include "execution/compiler/codegen.h"
 #include "execution/compiler/compilation_context.h"
-#include "execution/compiler/function_builder.h"
 #include "execution/compiler/if.h"
 #include "execution/compiler/work_context.h"
 #include "planner/plannodes/delete_plan_node.h"

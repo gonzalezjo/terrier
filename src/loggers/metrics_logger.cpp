@@ -1,7 +1,5 @@
 #include "loggers/metrics_logger.h"
 
-#include <memory>
-
 namespace terrier::metrics {
 
 std::shared_ptr<spdlog::logger> metrics_logger = nullptr;  // NOLINT

@@ -1,16 +1,11 @@
+#include "planner/plannodes/output_schema.h"
+
 #include <memory>
-#include <string>
-#include <tuple>
-#include <utility>
 #include <vector>
 
 #include "catalog/catalog_defs.h"
 #include "parser/expression/abstract_expression.h"
 #include "parser/expression/constant_value_expression.h"
-#include "planner/plannodes/output_schema.h"
-
-#include "type/type_id.h"
-
 #include "test_util/test_harness.h"
 
 namespace terrier::planner {

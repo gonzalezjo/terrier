@@ -1,7 +1,6 @@
 #include "execution/sql/index_iterator.h"
 
 #include "catalog/catalog_accessor.h"
-#include "execution/sql/value.h"
 #include "storage/sql_table.h"
 
 namespace terrier::execution::sql {

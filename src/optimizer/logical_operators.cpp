@@ -1,16 +1,6 @@
 #include "optimizer/logical_operators.h"
 
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <vector>
-
-#include "catalog/catalog_defs.h"
-#include "common/macros.h"
 #include "optimizer/operator_visitor.h"
-#include "parser/expression/abstract_expression.h"
 
 namespace terrier::optimizer {
 

@@ -1,14 +1,11 @@
 #include "execution/sql/join_hash_table_vector_probe.h"
 
-#include "common/constants.h"
 #include "common/error/exception.h"
 #include "execution/sql/constant_vector.h"
-#include "execution/sql/generic_value.h"
 #include "execution/sql/join_hash_table.h"
 #include "execution/sql/static_vector.h"
 #include "execution/sql/vector_operations/vector_operations.h"
 #include "execution/sql/vector_projection.h"
-#include "execution/util/cpu_info.h"
 #include "spdlog/fmt/fmt.h"
 
 namespace terrier::execution::sql {

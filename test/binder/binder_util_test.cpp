@@ -1,8 +1,5 @@
 #include "binder/binder_util.h"
 
-#include <memory>
-
-#include "common/managed_pointer.h"
 #include "execution/sql/value_util.h"
 #include "parser/expression/constant_value_expression.h"
 #include "test_util/test_harness.h"

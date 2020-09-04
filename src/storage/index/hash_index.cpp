@@ -5,7 +5,6 @@
 #include "storage/index/hash_key.h"
 #include "transaction/deferred_action_manager.h"
 #include "transaction/transaction_context.h"
-#include "xxHash/xxh3.h"
 
 namespace terrier::storage::index {
 

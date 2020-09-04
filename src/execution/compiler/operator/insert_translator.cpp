@@ -1,14 +1,10 @@
 #include "execution/compiler/operator/insert_translator.h"
 
-#include <vector>
-
 #include "catalog/catalog_accessor.h"
-#include "catalog/schema.h"
 #include "execution/ast/builtins.h"
 #include "execution/ast/type.h"
 #include "execution/compiler/codegen.h"
 #include "execution/compiler/compilation_context.h"
-#include "execution/compiler/function_builder.h"
 #include "execution/compiler/if.h"
 #include "execution/compiler/work_context.h"
 #include "planner/plannodes/insert_plan_node.h"

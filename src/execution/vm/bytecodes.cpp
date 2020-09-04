@@ -1,7 +1,5 @@
 #include "execution/vm/bytecodes.h"
 
-#include <algorithm>
-
 #include "execution/vm/bytecode_traits.h"
 
 namespace terrier::execution::vm {

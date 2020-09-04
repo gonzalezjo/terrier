@@ -7,8 +7,6 @@
 #include "network/network_defs.h"
 #include "optimizer/optimizer_defs.h"
 #include "storage/storage_defs.h"
-#include "transaction/transaction_defs.h"
-#include "type/type_id.h"
 
 namespace terrier::common {
 

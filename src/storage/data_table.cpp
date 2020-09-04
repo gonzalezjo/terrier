@@ -2,12 +2,8 @@
 
 #include <list>
 
-#include "common/allocator.h"
 #include "execution/sql/vector_projection.h"
-#include "storage/block_access_controller.h"
-#include "storage/storage_util.h"
 #include "transaction/transaction_context.h"
-#include "transaction/transaction_util.h"
 
 namespace terrier::storage {
 

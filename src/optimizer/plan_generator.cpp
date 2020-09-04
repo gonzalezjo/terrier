@@ -1,22 +1,12 @@
 #include "optimizer/plan_generator.h"
 
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <vector>
-
 #include "catalog/catalog_accessor.h"
-#include "common/error/exception.h"
 #include "execution/sql/value.h"
-#include "optimizer/abstract_optimizer_node.h"
 #include "optimizer/operator_node.h"
 #include "optimizer/physical_operators.h"
 #include "optimizer/properties.h"
 #include "optimizer/property_set.h"
 #include "optimizer/util.h"
-#include "parser/expression/abstract_expression.h"
 #include "parser/expression/constant_value_expression.h"
 #include "parser/expression_util.h"
 #include "planner/plannodes/aggregate_plan_node.h"
@@ -49,7 +39,6 @@
 #include "planner/plannodes/update_plan_node.h"
 #include "settings/settings_manager.h"
 #include "storage/sql_table.h"
-#include "transaction/transaction_context.h"
 
 namespace terrier::optimizer {
 

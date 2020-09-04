@@ -1,7 +1,6 @@
 #include "type/type_util.h"
 
 #include "gtest/gtest.h"
-#include "type/type_id.h"
 
 namespace terrier::type {
 

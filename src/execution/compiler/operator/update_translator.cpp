@@ -1,12 +1,8 @@
 #include "execution/compiler/operator/update_translator.h"
 
-#include <utility>
-#include <vector>
-
 #include "catalog/catalog_accessor.h"
 #include "execution/compiler/codegen.h"
 #include "execution/compiler/compilation_context.h"
-#include "execution/compiler/function_builder.h"
 #include "execution/compiler/if.h"
 #include "execution/compiler/work_context.h"
 #include "planner/plannodes/update_plan_node.h"

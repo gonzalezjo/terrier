@@ -1,9 +1,4 @@
 #include "metrics/metrics_store.h"
-#include <bitset>
-#include <memory>
-#include <vector>
-#include "metrics/logging_metric.h"
-#include "metrics/metrics_defs.h"
 
 namespace terrier::metrics {
 

@@ -2,7 +2,6 @@
 #include "execution/exec/execution_settings.h"
 #include "execution/sql/operators/numeric_binary_operators.h"
 #include "execution/sql/vector_operations/binary_operation_executor.h"
-#include "execution/sql/vector_operations/vector_operations.h"
 #include "spdlog/fmt/fmt.h"
 
 namespace terrier::execution::sql {

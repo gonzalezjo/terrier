@@ -1,7 +1,5 @@
 #include "execution/sql/operators/like_operators.h"
 
-#include "common/macros.h"
-
 namespace terrier::execution::sql {
 
 #define NextByte(p, plen) ((p)++, (plen)--)

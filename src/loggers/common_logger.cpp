@@ -1,7 +1,5 @@
 #include "loggers/common_logger.h"
 
-#include <memory>
-
 namespace terrier::common {
 
 std::shared_ptr<spdlog::logger> common_logger = nullptr;  // NOLINT

@@ -2,26 +2,13 @@
 
 #include <tbb/parallel_for_each.h>
 
-#include <algorithm>
-#include <memory>
-#include <numeric>
-#include <utility>
-#include <vector>
-
-#include "common/error/exception.h"
-#include "common/math_util.h"
 #include "execution/sql/constant_vector.h"
-#include "execution/sql/generic_value.h"
 #include "execution/sql/thread_state_container.h"
 #include "execution/sql/vector_operations/unary_operation_executor.h"
-#include "execution/sql/vector_operations/vector_operations.h"
 #include "execution/sql/vector_projection_iterator.h"
-#include "execution/util/bit_util.h"
-#include "execution/util/cpu_info.h"
 #include "execution/util/timer.h"
 #include "libcount/hll.h"
 #include "loggers/execution_logger.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace terrier::execution::sql {
 

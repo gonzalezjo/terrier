@@ -1,15 +1,14 @@
+#include "optimizer/input_column_deriver.h"
+
 #include <string>
 #include <utility>
 #include <vector>
 
-#include "optimizer/input_column_deriver.h"
 #include "optimizer/memo.h"
-#include "optimizer/operator_node.h"
 #include "optimizer/physical_operators.h"
 #include "optimizer/properties.h"
 #include "optimizer/util.h"
 #include "parser/expression_util.h"
-#include "storage/data_table.h"
 
 namespace terrier::optimizer {
 

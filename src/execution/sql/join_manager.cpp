@@ -5,7 +5,6 @@
 #include "execution/sql/vector_projection.h"
 #include "execution/sql/vector_projection_iterator.h"
 #include "loggers/execution_logger.h"
-#include "planner/plannodes/plan_node_defs.h"
 
 namespace terrier::execution::sql {
 

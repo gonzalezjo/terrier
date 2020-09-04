@@ -1,18 +1,10 @@
 #include "storage/index/index_builder.h"
 
-#include <utility>
-#include <vector>
-
-#include "catalog/catalog_defs.h"
 #include "storage/index/bwtree_index.h"
 #include "storage/index/compact_ints_key.h"
 #include "storage/index/generic_key.h"
 #include "storage/index/hash_index.h"
 #include "storage/index/hash_key.h"
-#include "storage/index/index.h"
-#include "storage/index/index_defs.h"
-#include "storage/index/index_metadata.h"
-#include "storage/projected_row.h"
 
 namespace terrier::storage::index {
 

@@ -1,7 +1,5 @@
 #include "loggers/transaction_logger.h"
 
-#include <memory>
-
 namespace terrier::transaction {
 
 std::shared_ptr<spdlog::logger> transaction_logger = nullptr;  // NOLINT

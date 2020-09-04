@@ -1,7 +1,5 @@
 #include "loggers/settings_logger.h"
 
-#include <memory>
-
 namespace terrier::settings {
 
 std::shared_ptr<spdlog::logger> settings_logger = nullptr;  // NOLINT

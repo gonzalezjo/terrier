@@ -1,8 +1,6 @@
 #include "execution/sql/functions/string_functions.h"
 
-#include <algorithm>
 #include <bitset>
-#include <string>
 
 #include "execution/exec/execution_context.h"
 #include "execution/sql/operators/like_operators.h"

@@ -1,18 +1,8 @@
 #include "optimizer/physical_operators.h"
 
-#include <algorithm>
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <vector>
-
 #include "catalog/index_schema.h"
 #include "catalog/schema.h"
-#include "common/macros.h"
 #include "optimizer/operator_visitor.h"
-#include "parser/expression/abstract_expression.h"
 
 namespace terrier::optimizer {
 

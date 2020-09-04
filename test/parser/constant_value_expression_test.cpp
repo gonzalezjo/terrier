@@ -1,7 +1,6 @@
 #include "parser/expression/constant_value_expression.h"
 
 #include <random>
-#include <utility>
 
 #include "common/json.h"
 #include "execution/sql/value_util.h"

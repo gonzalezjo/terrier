@@ -1,7 +1,5 @@
 #include "loggers/optimizer_logger.h"
 
-#include <memory>
-
 namespace terrier::optimizer {
 
 std::shared_ptr<spdlog::logger> optimizer_logger = nullptr;  // NOLINT

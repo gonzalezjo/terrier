@@ -1,10 +1,5 @@
 #include "optimizer/binding.h"
 
-#include <memory>
-#include <utility>
-#include <vector>
-
-#include "loggers/optimizer_logger.h"
 #include "optimizer/logical_operators.h"
 #include "optimizer/operator_visitor.h"
 #include "optimizer/optimizer.h"

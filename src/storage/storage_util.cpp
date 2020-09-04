@@ -1,9 +1,5 @@
 #include "storage/storage_util.h"
 
-#include <cstring>
-#include <unordered_map>
-#include <vector>
-
 #include "catalog/schema.h"
 #include "execution/sql/vector_projection.h"
 #include "storage/projected_columns.h"

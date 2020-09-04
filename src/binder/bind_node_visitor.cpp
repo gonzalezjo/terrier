@@ -1,28 +1,13 @@
 #include "binder/bind_node_visitor.h"
 
-#include <algorithm>
-#include <memory>
-#include <string>
-#include <tuple>
-#include <utility>
-#include <vector>
-
 #include "binder/binder_context.h"
-#include "binder/binder_sherpa.h"
 #include "binder/binder_util.h"
-#include "catalog/catalog_accessor.h"
-#include "catalog/catalog_defs.h"
-#include "common/error/exception.h"
-#include "common/managed_pointer.h"
 #include "execution/functions/function_context.h"
 #include "loggers/binder_logger.h"
-#include "parser/expression/abstract_expression.h"
 #include "parser/expression/aggregate_expression.h"
 #include "parser/expression/case_expression.h"
-#include "parser/expression/column_value_expression.h"
 #include "parser/expression/comparison_expression.h"
 #include "parser/expression/conjunction_expression.h"
-#include "parser/expression/constant_value_expression.h"
 #include "parser/expression/function_expression.h"
 #include "parser/expression/operator_expression.h"
 #include "parser/expression/star_expression.h"

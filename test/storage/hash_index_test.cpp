@@ -1,25 +1,16 @@
 #include <cstring>
 #include <functional>
-#include <limits>
 #include <memory>
 #include <random>
-#include <vector>
 
 #include "main/db_main.h"
 #include "parser/expression/column_value_expression.h"
-#include "portable_endian/portable_endian.h"
-#include "storage/garbage_collector_thread.h"
 #include "storage/index/compact_ints_key.h"
 #include "storage/index/index.h"
 #include "storage/index/index_builder.h"
-#include "storage/projected_row.h"
 #include "storage/sql_table.h"
 #include "test_util/catalog_test_util.h"
-#include "test_util/storage_test_util.h"
 #include "test_util/test_harness.h"
-#include "transaction/transaction_context.h"
-#include "transaction/transaction_manager.h"
-#include "type/type_id.h"
 
 namespace terrier::storage::index {
 

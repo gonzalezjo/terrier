@@ -1,6 +1,5 @@
 #include "execution/ast/ast_node_factory.h"
 #include "execution/ast/context.h"
-#include "execution/ast/type.h"
 #include "execution/sema/sema.h"
 
 namespace terrier::execution::sema {
